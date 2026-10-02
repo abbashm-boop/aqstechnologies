@@ -1,7 +1,6 @@
 export const siteConfig = {
   name: "AQS Technologies",
-  description:
-    "AQS Technologies builds websites, software, and digital products for growing businesses.",
+  description: "The new AQS Technologies website is coming soon.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aqstechnologies.com",
   nav: [
     { href: "/", label: "Home" },
