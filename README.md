@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AQS Technologies
 
-## Getting Started
+Next.js website for AQS Technologies, with TypeScript, Tailwind CSS, and Supabase.
 
-First, run the development server:
+## Stack
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Supabase (`@supabase/ssr` for browser, server, and session refresh)
+
+## Getting started
 
 ```bash
+cp .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Add your project URL and anon key from the Supabase dashboard to `.env.local`. The site still renders if those values are empty. Database calls throw a clear error until they are set. Keep `SUPABASE_SERVICE_ROLE_KEY` on the server only.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Local development |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript |
 
-To learn more about Next.js, take a look at the following resources:
+## File structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+src/
+  app/
+    (site)/            Public pages: home, about, services, contact
+    api/health/        Lightweight health check
+    layout.tsx         Root HTML, fonts, metadata
+    error.tsx          Root error boundary
+    not-found.tsx
+    loading.tsx
+  components/
+    layout/            Header and footer
+    ui/                Shared UI primitives
+  config/site.ts       Site name, navigation, and copy
+  lib/
+    env.ts             Environment checks
+    supabase/
+      client.ts        Browser client (Client Components)
+      server.ts        Cookie-based server client
+      admin.ts         Service-role client (server only)
+      proxy.ts         Session refresh helper
+  proxy.ts             Next.js proxy (auth cookie refresh)
+  types/database.ts    Generated Supabase types
+supabase/migrations/   SQL migrations
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Use `createClient` from `@/lib/supabase/server` in Server Components, Route Handlers, and Server Actions. Use `@/lib/supabase/client` only in Client Components. Use `@/lib/supabase/admin` only when a request must bypass Row Level Security.
 
-## Deploy on Vercel
+After you add tables, replace `src/types/database.ts`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx supabase gen types typescript --project-id <project-id> --schema public > src/types/database.ts
+```
