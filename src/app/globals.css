@@ -1,26 +1,220 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f6f8;
+  --foreground: #0b1f3a;
+  --aqs-navy: #0b1f3a;
+  --aqs-navy-deep: #071526;
+  --aqs-red: #e31c23;
+  --aqs-red-hover: #c4161c;
+  --aqs-blue: #1e4f9a;
+  --aqs-muted: #5b6573;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-aqs-navy: var(--aqs-navy);
+  --color-aqs-navy-deep: var(--aqs-navy-deep);
+  --color-aqs-red: var(--aqs-red);
+  --color-aqs-red-hover: var(--aqs-red-hover);
+  --color-aqs-blue: var(--aqs-blue);
+  --color-aqs-muted: var(--aqs-muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: clip;
+}
+
+.tilt-root {
+  perspective: 680px;
+  perspective-origin: 50% 42%;
+  transform-style: preserve-3d;
+  touch-action: pan-y;
+}
+
+.tilt-inner {
+  position: relative;
+  width: 100%;
+  height: inherit;
+  min-height: inherit;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+  border-radius: inherit;
+  backface-visibility: hidden;
+}
+
+.tilt-glare {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  mix-blend-mode: overlay;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.28) 48%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.shine:hover::after {
+  transform: translateX(120%);
+}
+
+.reveal {
+  opacity: 0;
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-up {
+  transform: translateY(28px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float-y 4.8s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.06);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 5s ease-in-out infinite;
+}
+
+.img-zoom {
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .img-zoom {
+  transform: scale(1.07);
+}
+
+.hero-media {
+  will-change: transform;
+  transform: translate3d(0, 0, 0) scale(1.12);
+}
+
+.process-line {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.reveal-in .process-line {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tilt-inner,
+  .tilt-glare,
+  .animate-fade-up,
+  .animate-marquee,
+  .animate-float,
+  .animate-pulse-soft,
+  .shine::after,
+  .img-zoom,
+  .process-line,
+  .hero-media {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .group:hover .img-zoom {
+    transform: none;
+  }
 }

@@ -19,11 +19,11 @@ export function ButtonLink({
     <Link
       href={href}
       className={cn(
-        "inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-medium transition-colors",
+        "inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold transition-colors",
         variant === "primary" &&
-          "bg-foreground text-background hover:bg-zinc-700 dark:hover:bg-zinc-200",
+          "bg-aqs-red text-white hover:bg-aqs-red-hover",
         variant === "secondary" &&
-          "border border-black/10 hover:bg-black/5 dark:border-white/15 dark:hover:bg-white/10",
+          "border border-black/10 bg-white text-aqs-navy hover:bg-black/5",
         className,
       )}
     >
