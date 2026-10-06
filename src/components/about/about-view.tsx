@@ -168,7 +168,7 @@ export function AboutView() {
                 <Tilt className="h-full">
                   <Link
                     href={category.href}
-                    className="group flex h-full flex-col overflow-hidden rounded-[24px] border border-black/6 bg-white transition-shadow duration-500 hover:shadow-[0_20px_44px_rgba(11,31,58,0.12)]"
+                    className="group flex h-full flex-col overflow-hidden rounded-[36px] border border-black/4 bg-white transition-shadow duration-300 hover:shadow-[0_8px_18px_rgba(11,31,58,0.08)]"
                   >
                     <div className="relative aspect-[16/10] overflow-hidden bg-[#f7f8fa]">
                       <Image
@@ -213,7 +213,7 @@ export function AboutView() {
               </p>
             </div>
             <ButtonLink
-              href="/brands"
+              href="/partners"
               className="shine shrink-0 gap-2 transition-transform hover:-translate-y-0.5"
             >
               View All Brands <span aria-hidden>→</span>

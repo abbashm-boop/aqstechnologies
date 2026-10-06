@@ -22,7 +22,7 @@ export default function PartnersPage() {
         {siteConfig.partners.map((partner) => (
           <article
             key={partner.name}
-            id={partner.href.split("#")[1]}
+            id={partner.slug}
             className="scroll-mt-32 rounded-xl border border-black/8 p-6"
           >
             <Tilt className="h-16 w-48">
@@ -35,7 +35,7 @@ export default function PartnersPage() {
               {partner.description}
             </p>
             <div className="mt-5">
-              <ButtonLink href="/contact">View {partner.name} Products</ButtonLink>
+              <ButtonLink href={partner.href}>View {partner.name} Products</ButtonLink>
             </div>
           </article>
         ))}

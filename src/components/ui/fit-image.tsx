@@ -19,22 +19,22 @@ export function FitImage({
   insetClassName?: string;
 }) {
   return (
-    <Tilt>
+    <Tilt className={className}>
       <div
         className={cn(
-          "relative w-full overflow-hidden border border-black/6 bg-white",
+          "relative w-full overflow-hidden rounded-[inherit] border border-black/4 bg-white",
           className,
         )}
       >
         <div className={cn("absolute", insetClassName)}>
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          loading="eager"
-          className="object-contain object-center"
-        />
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes={sizes}
+            loading="eager"
+            className="object-contain object-center"
+          />
         </div>
       </div>
     </Tilt>

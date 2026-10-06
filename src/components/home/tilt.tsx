@@ -59,14 +59,14 @@ export function Tilt({
       const glare = glareRef.current;
       if (!inner) return;
 
-      inner.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(${lift}px) scale(${hovering ? 1.045 : 1 + lift * 0.0012})`;
+      inner.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(${lift}px) scale(${hovering ? 1.015 : 1 + lift * 0.0004})`;
       inner.style.boxShadow = hovering
-        ? `${-ry * 1.6}px ${rx * 1.8 + 22}px 48px rgba(11, 31, 58, 0.26), 0 12px 28px rgba(11, 31, 58, 0.12)`
-        : `${-ry * 0.9}px ${Math.abs(rx) * 1.1 + 14}px 32px rgba(11, 31, 58, 0.14)`;
+        ? `0 8px 18px rgba(11, 31, 58, 0.08)`
+        : `0 4px 12px rgba(11, 31, 58, 0.04)`;
 
       if (glare) {
-        glare.style.opacity = hovering ? "1" : String(Math.min(0.32, lift * 0.012));
-        glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.55), transparent 58%)`;
+        glare.style.opacity = hovering ? "0.35" : String(Math.min(0.12, lift * 0.006));
+        glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.28), transparent 62%)`;
       }
     }
 
@@ -139,9 +139,9 @@ export function Tilt({
       const progress = Math.max(-1, Math.min(1, (mid - viewH / 2) / (viewH / 2)));
       const closeness = 1 - Math.abs(progress);
 
-      target.current.rx = progress * 16 * intensity;
-      target.current.ry = progress * -6 * intensity;
-      target.current.lift = closeness * 26 * intensity;
+      target.current.rx = progress * 5 * intensity;
+      target.current.ry = progress * -2 * intensity;
+      target.current.lift = closeness * 8 * intensity;
       start();
     }
 
@@ -155,11 +155,11 @@ export function Tilt({
       const touch = event.pointerType === "touch";
       const amp = touch ? 0.7 : 1;
       target.current.hovering = true;
-      target.current.rx = (0.5 - y) * 18 * amp;
-      target.current.ry = (x - 0.5) * 24 * amp;
+      target.current.rx = (0.5 - y) * 6 * amp;
+      target.current.ry = (x - 0.5) * 8 * amp;
       target.current.gx = x * 100;
       target.current.gy = y * 100;
-      target.current.lift = touch ? 16 : 32;
+      target.current.lift = touch ? 4 : 8;
       start();
     }
 

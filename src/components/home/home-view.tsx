@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
+import { HeroHologram } from "@/components/home/hero-hologram";
 import { Tilt } from "@/components/home/tilt";
 import { BrandLogo } from "@/components/ui/brand-logo";
 import { Container } from "@/components/ui/container";
@@ -53,7 +54,7 @@ export function HomeView() {
   return (
     <>
       <section className="relative overflow-hidden">
-        <div className="relative min-h-[380px] overflow-hidden lg:min-h-[480px]">
+        <div className="relative min-h-[460px] overflow-hidden lg:min-h-[500px]">
           <div ref={heroMediaRef} className="hero-media absolute inset-0">
             <video
               ref={videoRef}
@@ -76,28 +77,28 @@ export function HomeView() {
               className="hidden object-cover object-[center_35%] motion-reduce:block"
             />
           </div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(227,28,35,0.18),transparent_28%),linear-gradient(90deg,#050d18_0%,rgba(5,13,24,0.68)_42%,rgba(5,13,24,0.22)_100%)]" />
-          <Container className="relative z-10 flex min-h-[380px] items-center py-10 lg:min-h-[480px] lg:py-14">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(227,28,35,0.18),transparent_28%),linear-gradient(90deg,#050d18_0%,rgba(5,13,24,0.72)_38%,rgba(5,13,24,0.42)_100%)]" />
+          <Container className="relative z-10 grid min-h-[460px] items-start gap-5 pt-7 pb-8 lg:min-h-[500px] lg:grid-cols-2 lg:gap-8 lg:pt-8 lg:pb-8">
             <div className="max-w-xl text-white animate-fade-up">
-              <p className="text-[11px] font-semibold tracking-[0.28em] text-white/70 uppercase">
+              <p className="inline-flex items-center rounded-full border border-aqs-red/40 bg-aqs-red/15 px-3 py-1 text-[11px] font-semibold tracking-[0.22em] text-white uppercase shadow-[0_0_18px_rgba(227,28,35,0.28)]">
                 {siteConfig.legalName}
               </p>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[44px] lg:leading-[1.08]">
+              <h1 className="mt-3 text-[32px] font-semibold tracking-tight text-white sm:text-[40px] sm:leading-[1.12] lg:text-[42px] lg:leading-[1.1]">
                 Trusted Technology Products for Modern Workplaces
               </h1>
-              <p className="mt-4 max-w-lg text-sm leading-7 text-white/78">
+              <p className="mt-3 max-w-md text-[14px] leading-6 text-white/72">
                 {siteConfig.description}
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Link
                   href="/contact"
-                  className="shine inline-flex h-11 items-center rounded-full bg-aqs-red px-6 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(227,28,35,0.35)] transition-transform hover:-translate-y-0.5"
+                  className="shine inline-flex h-11 items-center rounded-full bg-aqs-red px-6 text-[13px] font-semibold text-white shadow-[0_12px_30px_rgba(227,28,35,0.35)] transition-transform hover:-translate-y-0.5"
                 >
                   Request a Quote
                 </Link>
                 <Link
                   href="/products"
-                  className="inline-flex h-11 items-center rounded-full border border-white/30 bg-white/8 px-6 text-sm font-semibold text-white backdrop-blur-md transition-transform hover:-translate-y-0.5 hover:bg-white/14"
+                  className="inline-flex h-11 items-center rounded-full border border-white/22 bg-white/8 px-6 text-[13px] font-semibold text-white backdrop-blur-md transition-colors hover:border-white/40 hover:bg-white/12"
                 >
                   View Products
                 </Link>
@@ -106,7 +107,7 @@ export function HomeView() {
                 {siteConfig.heroHighlights.map((item, index) => (
                   <span
                     key={item.title}
-                    className="animate-fade-up rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-[11px] font-semibold tracking-wide text-white/85 backdrop-blur-md"
+                    className="animate-fade-up rounded-full border border-white/12 bg-black/20 px-3 py-1.5 text-[11px] font-medium tracking-wide text-white/80"
                     style={{ animationDelay: `${180 + index * 90}ms` }}
                   >
                     {item.title}
@@ -114,29 +115,9 @@ export function HomeView() {
                 ))}
               </div>
             </div>
+            <HeroHologram />
           </Container>
         </div>
-
-        <Container className="relative z-20 -mt-7">
-          <Reveal>
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-white/60 bg-white/70 shadow-[0_18px_50px_rgba(11,31,58,0.14)] backdrop-blur-xl sm:grid-cols-2 lg:grid-cols-4">
-              {siteConfig.productCategories.map((category) => (
-                <Link
-                  key={category.title}
-                  href={category.href}
-                  className="group flex items-center justify-between gap-3 bg-white/40 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white"
-                >
-                  <span className="text-sm font-semibold text-aqs-navy">
-                    {category.title}
-                  </span>
-                  <span className="text-aqs-red transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </Reveal>
-        </Container>
       </section>
 
       <section className="py-14 sm:py-24">
@@ -157,8 +138,8 @@ export function HomeView() {
                     src={category.image}
                     alt={category.title}
                     sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
-                    className="aspect-[4/3] rounded-[28px]"
-                    insetClassName="inset-6"
+                    className="aspect-[4/3] rounded-[36px]"
+                    insetClassName="inset-4"
                   />
                   <h3 className="mt-4 text-center text-xl font-semibold text-aqs-navy">
                     {category.title}
@@ -179,7 +160,7 @@ export function HomeView() {
       {siteConfig.productCategories.map((category, index) => (
         <section
           key={category.title}
-          id={category.href.split("#")[1]}
+          id={category.slug}
           className={`scroll-mt-32 py-16 ${index % 2 === 1 ? "bg-white" : ""}`}
         >
           <Container>
@@ -199,14 +180,18 @@ export function HomeView() {
                 </Link>
               </div>
             </Reveal>
-            <div className="mt-10 grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            <div className="mt-10 flex flex-wrap justify-center gap-5">
               {category.links.map((item) => (
-                <Link key={item.label} href="/contact" className="group block">
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="group block w-full sm:w-[calc((100%-1.25rem)/2)] md:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-5rem)/5)]"
+                >
                   <FitImage
                     src={item.image}
                     alt={item.label}
-                    className="aspect-square rounded-[24px]"
-                    insetClassName="inset-6"
+                    className="aspect-square rounded-[36px]"
+                    insetClassName="inset-4"
                   />
                   <h3 className="mt-4 text-center text-sm font-semibold text-aqs-navy">
                     {item.label}
@@ -228,7 +213,7 @@ export function HomeView() {
             <p className="mx-auto mt-3 max-w-xl text-sm text-white/70">
               We supply genuine products from leading technology brands.
             </p>
-            <Link href="/brands" className="mt-4 inline-block text-sm font-semibold">
+            <Link href="/partners" className="mt-4 inline-block text-sm font-semibold">
               View All Brands →
             </Link>
           </Reveal>
