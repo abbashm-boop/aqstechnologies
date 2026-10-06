@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 
 import { Tilt } from "@/components/home/tilt";
 import { Container } from "@/components/ui/container";
@@ -25,6 +26,8 @@ export function SiteHeader() {
   const [query, setQuery] = useState("");
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const barRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const [drawerTop, setDrawerTop] = useState(104);
 
   function open(menu: MenuKey) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -49,10 +52,16 @@ export function SiteHeader() {
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (!mobileOpen) return;
+
+    function syncDrawerTop() {
+      const top = headerRef.current?.getBoundingClientRect().bottom ?? 104;
+      setDrawerTop(top);
+    }
+
+    syncDrawerTop();
+    window.addEventListener("resize", syncDrawerTop);
+    return () => window.removeEventListener("resize", syncDrawerTop);
   }, [mobileOpen]);
 
   useEffect(() => {
@@ -86,7 +95,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white">
+    <header ref={headerRef} className="sticky top-0 z-[70] [overflow-anchor:none] bg-white">
       <div className="bg-aqs-navy text-white">
         <Container className="flex h-9 items-center justify-between gap-6 text-[12px] sm:h-10">
           <p className="truncate font-medium">{siteConfig.tagline}</p>
@@ -219,7 +228,10 @@ export function SiteHeader() {
             type="button"
             className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            onClick={() => {
+            aria-expanded={mobileOpen}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
               setMobileOpen((open) => !open);
               setMobileSearch(false);
               closeNow();
@@ -247,9 +259,13 @@ export function SiteHeader() {
         ) : null}
       </div>
 
-      {mobileOpen ? (
-        <div className="max-h-[calc(100vh-120px)] overflow-x-clip overflow-y-auto border-b border-black/8 bg-white lg:hidden">
-          <Container className="flex flex-col gap-1 py-4">
+      {mobileOpen
+        ? createPortal(
+            <div
+              className="fixed inset-x-0 z-[60] overflow-x-clip overflow-y-auto overscroll-contain border-t border-black/8 bg-white lg:hidden"
+              style={{ top: drawerTop, bottom: 0 }}
+            >
+              <Container className="flex flex-col gap-1 py-4 pb-24">
             {siteConfig.nav.map((item) => {
               const hasMenu = "menu" in item && Boolean(item.menu);
               if (!hasMenu) {
@@ -306,8 +322,10 @@ export function SiteHeader() {
               Request a Quote
             </Link>
           </Container>
-        </div>
-      ) : null}
+        </div>,
+            document.body,
+          )
+        : null}
     </header>
   );
 }

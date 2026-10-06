@@ -1,22 +1,13 @@
 import type { Metadata } from "next";
 
-import { PageHero } from "@/components/layout/page-hero";
-import { Container } from "@/components/ui/container";
+import { BlogsComingSoon } from "@/components/blogs/blogs-coming-soon";
 
 export const metadata: Metadata = {
   title: "Blogs",
+  description:
+    "AQS Technologies insights are coming soon. Practical guides on access control, AV, networking and enclosures.",
 };
 
 export default function BlogsPage() {
-  return (
-    <>
-      <PageHero
-        title="Latest Insights"
-        description="Product guides, workplace technology notes, and updates from AQS Technologies."
-      />
-      <Container className="py-16">
-        <p className="text-aqs-muted">Articles will appear here shortly.</p>
-      </Container>
-    </>
-  );
+  return <BlogsComingSoon />;
 }
