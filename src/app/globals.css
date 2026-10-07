@@ -211,9 +211,16 @@ body {
   transform: translate3d(0, 0, 0) scale(1.12);
 }
 
+.hero-wave {
+  background:
+    radial-gradient(ellipse at 50% 42%, #2436a8 0%, #10183a 42%, #070b18 78%);
+}
+
 .hero-wave-media {
   position: absolute;
   inset: 0;
+  transform-origin: 50% 58%;
+  animation: hero-lady-pop 0.72s cubic-bezier(0.22, 1.15, 0.32, 1) 0.2s both;
 }
 
 .hero-wave-frame {
@@ -228,7 +235,7 @@ body {
 
 .hero-palm-bob {
   position: absolute;
-  top: 64%;
+  top: 70%;
   right: 0;
   left: 0;
   z-index: 6;
@@ -240,13 +247,13 @@ body {
 
 .hero-palm-bob .hero-palm-card {
   display: flex;
-  width: 214px;
-  min-height: 214px;
-  margin-top: -214px;
-  margin-left: -36px;
+  width: min(320px, 86vw);
+  min-height: 280px;
+  margin-top: -280px;
+  margin-left: -28px;
   flex-direction: column;
   justify-content: center;
-  padding: 18px 16px;
+  padding: 24px 22px;
   text-align: left;
 }
 
@@ -259,44 +266,48 @@ body {
 .hero-palm-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 230, 210, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.52);
   border-radius: 16px;
   background: linear-gradient(
     165deg,
-    rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.05) 48%,
-    rgba(255, 190, 150, 0.08)
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.05) 42%,
+    rgba(170, 200, 255, 0.06) 100%
   );
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.46);
-  backdrop-filter: blur(12px) saturate(1.28);
-  -webkit-backdrop-filter: blur(12px) saturate(1.28);
-  animation: hero-palm-in 0.45s ease both;
+    0 10px 28px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px) saturate(1.4);
+  -webkit-backdrop-filter: blur(5px) saturate(1.4);
+  animation: hero-box-out 0.78s cubic-bezier(0.16, 1.15, 0.3, 1) 1.05s both;
 }
 
 .hero-palm-title {
-  text-shadow: 0 0 18px rgba(255, 210, 170, 0.45);
+  text-shadow:
+    0 1px 10px rgba(0, 0, 0, 0.55),
+    0 0 18px rgba(255, 210, 170, 0.35);
 }
 
 .hero-palm-copy {
-  animation: hero-palm-copy 0.5s ease both;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+  animation: hero-palm-copy 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-palm-copy-1 {
-  animation-delay: 0s;
+  animation-delay: 1.48s;
 }
 
 .hero-palm-copy-2 {
-  animation-delay: 0.08s;
+  animation-delay: 1.62s;
 }
 
 .hero-palm-copy-3 {
-  animation-delay: 0.16s;
+  animation-delay: 1.76s;
 }
 
 .hero-palm-copy-4 {
-  animation-delay: 0.24s;
+  animation-delay: 1.9s;
 }
 
 .hero-palm-card::before {
@@ -306,10 +317,11 @@ body {
   pointer-events: none;
   background: linear-gradient(
     125deg,
-    rgba(255, 255, 255, 0.14),
-    transparent 34%,
-    transparent 68%,
-    rgba(255, 255, 255, 0.08)
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.08) 22%,
+    transparent 42%,
+    transparent 72%,
+    rgba(255, 255, 255, 0.1) 100%
   );
 }
 
@@ -323,19 +335,58 @@ body {
   }
 }
 
-@keyframes hero-palm-in {
-  from {
+@keyframes hero-lady-pop {
+  0% {
     opacity: 0;
+    transform: translateY(28px) scale(0.96);
   }
-  to {
+  72% {
     opacity: 1;
+    transform: translateY(-6px) scale(1.015);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-box-out {
+  0% {
+    opacity: 0;
+    width: 18px;
+    min-height: 18px;
+    margin-top: -18px;
+    padding: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  62% {
+    opacity: 1;
+    width: min(338px, 90vw);
+    min-height: 294px;
+    margin-top: -294px;
+    padding: 24px 22px;
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.62),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.12);
+  }
+  100% {
+    opacity: 1;
+    width: min(320px, 86vw);
+    min-height: 280px;
+    margin-top: -280px;
+    padding: 24px 22px;
+    box-shadow:
+      0 10px 28px rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1);
   }
 }
 
 @keyframes hero-palm-copy {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
