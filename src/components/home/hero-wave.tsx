@@ -5,17 +5,30 @@ import { siteConfig } from "@/config/site";
 export function HeroWave() {
   return (
     <section className="relative overflow-hidden bg-[#070b18]">
-      <div className="hero-wave relative min-h-[500px] overflow-hidden sm:min-h-[560px] lg:min-h-[600px]">
-        <div className="hero-wave-media">
+      <div className="hero-wave relative min-h-[540px] overflow-hidden sm:min-h-[560px] lg:min-h-[600px]">
+        <div className="hero-wave-bg pointer-events-none">
           <Image
-            src="/images/hero-palm-offer.jpg"
+            src="/images/hero-palm-bg.jpg"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_8%]"
+            className="object-cover"
           />
         </div>
+
+        <div className="hero-wave-girl pointer-events-none">
+          <Image
+            src="/images/hero-palm-girl.png"
+            alt=""
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="hero-palm-photo object-cover"
+          />
+        </div>
+
         <div className="hero-wave-veil pointer-events-none absolute inset-0" />
 
         <div className="hero-palm-bob">

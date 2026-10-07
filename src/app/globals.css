@@ -216,11 +216,23 @@ body {
     radial-gradient(ellipse at 50% 42%, #2436a8 0%, #10183a 42%, #070b18 78%);
 }
 
-.hero-wave-media {
+.hero-wave-bg {
   position: absolute;
   inset: 0;
+  z-index: 1;
+  animation: hero-bg-in 0.45s ease both;
+}
+
+.hero-wave-girl {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   transform-origin: 50% 58%;
-  animation: hero-lady-pop 0.72s cubic-bezier(0.22, 1.15, 0.32, 1) 0.2s both;
+  animation: hero-lady-pop 0.72s cubic-bezier(0.22, 1.15, 0.32, 1) 0.5s both;
+}
+
+.hero-palm-photo {
+  object-position: center 8%;
 }
 
 .hero-wave-frame {
@@ -234,6 +246,9 @@ body {
 }
 
 .hero-palm-bob {
+  --card-w: min(320px, 86vw);
+  --card-h: 280px;
+  --card-pad: 24px 22px;
   position: absolute;
   top: 70%;
   right: 0;
@@ -247,17 +262,18 @@ body {
 
 .hero-palm-bob .hero-palm-card {
   display: flex;
-  width: min(320px, 86vw);
-  min-height: 280px;
-  margin-top: -280px;
+  width: var(--card-w);
+  min-height: var(--card-h);
+  margin-top: calc(var(--card-h) * -1);
   margin-left: -28px;
   flex-direction: column;
   justify-content: center;
-  padding: 24px 22px;
+  padding: var(--card-pad);
   text-align: left;
 }
 
 .hero-wave-veil {
+  z-index: 3;
   background:
     radial-gradient(ellipse at 50% 42%, transparent 28%, rgba(4, 8, 18, 0.16) 62%, rgba(4, 8, 18, 0.48) 100%),
     linear-gradient(180deg, rgba(4, 8, 18, 0.08) 0%, transparent 32%, rgba(4, 8, 18, 0.42) 100%);
@@ -280,7 +296,7 @@ body {
     inset 0 -1px 0 rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px) saturate(1.4);
   -webkit-backdrop-filter: blur(5px) saturate(1.4);
-  animation: hero-box-out 0.78s cubic-bezier(0.16, 1.15, 0.3, 1) 1.05s both;
+  animation: hero-box-out 0.78s cubic-bezier(0.16, 1.15, 0.3, 1) 1.35s both;
 }
 
 .hero-palm-title {
@@ -295,19 +311,19 @@ body {
 }
 
 .hero-palm-copy-1 {
-  animation-delay: 1.48s;
+  animation-delay: 1.78s;
 }
 
 .hero-palm-copy-2 {
-  animation-delay: 1.62s;
+  animation-delay: 1.92s;
 }
 
 .hero-palm-copy-3 {
-  animation-delay: 1.76s;
+  animation-delay: 2.06s;
 }
 
 .hero-palm-copy-4 {
-  animation-delay: 1.9s;
+  animation-delay: 2.2s;
 }
 
 .hero-palm-card::before {
@@ -335,6 +351,15 @@ body {
   }
 }
 
+@keyframes hero-bg-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes hero-lady-pop {
   0% {
     opacity: 0;
@@ -353,18 +378,18 @@ body {
 @keyframes hero-box-out {
   0% {
     opacity: 0;
-    width: 18px;
-    min-height: 18px;
-    margin-top: -18px;
+    width: 16px;
+    min-height: 16px;
+    margin-top: -16px;
     padding: 0;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
   62% {
     opacity: 1;
-    width: min(338px, 90vw);
-    min-height: 294px;
-    margin-top: -294px;
-    padding: 24px 22px;
+    width: calc(var(--card-w) + 12px);
+    min-height: calc(var(--card-h) + 12px);
+    margin-top: calc((var(--card-h) + 12px) * -1);
+    padding: var(--card-pad);
     box-shadow:
       0 12px 32px rgba(0, 0, 0, 0.18),
       inset 0 1px 0 rgba(255, 255, 255, 0.62),
@@ -372,14 +397,55 @@ body {
   }
   100% {
     opacity: 1;
-    width: min(320px, 86vw);
-    min-height: 280px;
-    margin-top: -280px;
-    padding: 24px 22px;
+    width: var(--card-w);
+    min-height: var(--card-h);
+    margin-top: calc(var(--card-h) * -1);
+    padding: var(--card-pad);
     box-shadow:
       0 10px 28px rgba(0, 0, 0, 0.16),
       inset 0 1px 0 rgba(255, 255, 255, 0.55),
       inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-wave {
+    min-height: 540px;
+  }
+
+  .hero-wave-girl img {
+    object-position: center 28%;
+    transform: scale(1.28);
+    transform-origin: 50% 28%;
+  }
+
+  .hero-palm-bob {
+    --card-w: min(200px, 70vw);
+    --card-h: 164px;
+    --card-pad: 13px 14px;
+    top: 76%;
+  }
+
+  .hero-palm-bob .hero-palm-card {
+    margin-left: 0;
+  }
+
+  .hero-palm-copy-2 {
+    margin-top: 8px;
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .hero-palm-copy-3 {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .hero-palm-copy-4 {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.35;
   }
 }
 
@@ -1174,7 +1240,8 @@ body {
   .img-zoom,
   .process-line,
   .hero-media,
-  .hero-wave-media,
+  .hero-wave-bg,
+  .hero-wave-girl,
   .hero-wave-frame.is-up,
   .hero-palm-bob .hero-palm-card,
   .hero-palm-copy,
