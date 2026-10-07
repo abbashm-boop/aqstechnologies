@@ -15,9 +15,9 @@ export function SiteFooter() {
               <Image
                 src="/brand/logo.png"
                 alt={siteConfig.legalName}
-                width={240}
-                height={78}
-                className="h-11 w-auto sm:h-12"
+                width={900}
+                height={351}
+                className="h-12 w-auto max-w-[220px] object-contain object-left sm:h-14 sm:max-w-[260px]"
               />
             </Link>
             <p className="mt-4 text-sm leading-6 text-aqs-muted">

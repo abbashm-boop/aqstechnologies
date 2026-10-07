@@ -10,7 +10,7 @@ const categories = siteConfig.productCategories;
 const CARD_COPY = [
   { title: "Access Control", line: "Readers, cards and identity systems." },
   { title: "Audio Video", line: "Displays, conferencing and AV." },
-  { title: "Networking", line: "Copper, fiber and HDMI cables." },
+  { title: "Networking", line: "Cable certifiers and network testers." },
   { title: "Enclosures", line: "Server and networking racks." },
 ];
 const RAYS = [12, 20, 28, 36, 44, 52, 60, 68, 76, 84];

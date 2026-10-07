@@ -45,10 +45,10 @@ export function HomeView() {
               Explore Our Product Categories
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid items-stretch gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {siteConfig.productCategories.map((category, index) => (
-              <Reveal key={category.title} delay={index * 80}>
-                <Link href={category.href} className="group block">
+              <Reveal key={category.title} className="h-full" delay={index * 80}>
+                <Link href={category.href} className="group flex h-full flex-col">
                   <FitImage
                     src={category.image}
                     alt={category.title}
@@ -56,13 +56,13 @@ export function HomeView() {
                     className="aspect-[4/3] rounded-[36px]"
                     insetClassName="inset-4"
                   />
-                  <h3 className="mt-4 text-center text-xl font-semibold text-aqs-navy">
+                  <h3 className="mt-4 min-h-[3.5rem] text-center text-xl font-semibold leading-7 text-aqs-navy">
                     {category.title}
                   </h3>
-                  <p className="mt-2 text-center text-sm leading-6 text-aqs-muted">
+                  <p className="mt-2 flex-1 text-center text-sm leading-6 text-aqs-muted">
                     {category.blurb}
                   </p>
-                  <p className="mt-3 text-center text-sm font-semibold text-aqs-red transition-transform duration-300 group-hover:translate-x-1">
+                  <p className="mt-4 text-center text-sm font-semibold text-aqs-red transition-transform duration-300 group-hover:translate-x-1">
                     View Products →
                   </p>
                 </Link>
@@ -157,7 +157,7 @@ export function HomeView() {
         <Container>
           <Reveal shift>
             <h2 className="mx-auto max-w-2xl text-center text-4xl font-semibold tracking-tight text-aqs-navy">
-              Why Choose AQS Technologies
+              Why Choose AQS Technologies LLC
             </h2>
           </Reveal>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

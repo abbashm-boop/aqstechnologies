@@ -51,7 +51,7 @@ export function ContactForm({ topic }: { topic?: string }) {
 
   const whatsappHref = useMemo(() => {
     const lines = [
-      "Hello AQS Technologies, I would like to discuss a requirement.",
+      "Hello AQS Technologies LLC, I would like to discuss a requirement.",
       "",
       `Name: ${name.trim()}`,
       company.trim() ? `Company: ${company.trim()}` : null,

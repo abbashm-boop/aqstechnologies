@@ -41,7 +41,7 @@ export default async function ProductsPage({
   const count = categories.reduce((total, category) => total + category.links.length, 0);
 
   const firstImage =
-    categories[0]?.image ?? partner?.logo ?? "/images/category-access-control.png";
+    categories[0]?.image ?? partner?.logo ?? "/images/category-hid.png";
 
   return (
     <>
@@ -64,7 +64,7 @@ export default async function ProductsPage({
         image={partner ? partner.logo : firstImage}
         imageAlt={partner?.name ?? "AQS products"}
         logo={partner?.logo ?? "/brand/logo.png"}
-        logoAlt={partner?.name ?? "AQS Technologies"}
+        logoAlt={partner?.name ?? "AQS Technologies LLC"}
         quoteTitle={
           partner
             ? `Need ${partner.name} products?`

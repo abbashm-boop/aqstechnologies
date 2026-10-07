@@ -25,7 +25,7 @@ const faqs = [
     a: "Yes. We help with product specification, selection and after-sale support by phone, email or WhatsApp.",
   },
   {
-    q: "Can I become a partner with AQS?",
+    q: "Can I become a partner with AQS Technologies LLC?",
     a: "Yes. We work with system integrators, resellers and installers. Tell us about your business in the form and our team will follow up.",
   },
   {

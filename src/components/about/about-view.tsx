@@ -27,12 +27,12 @@ export function AboutView() {
               <span className="font-medium text-aqs-navy">About Us</span>
             </p>
             <p className="mt-6 text-[11px] font-semibold tracking-[0.24em] text-aqs-red uppercase">
-              {about.eyebrow}
+              {siteConfig.name}
             </p>
             <h1 className="mt-3 max-w-xl text-[1.85rem] font-semibold leading-tight tracking-tight text-aqs-navy sm:text-5xl">
-              {siteConfig.tagline}
+              About Us
             </h1>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-aqs-muted">
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-aqs-muted sm:text-[15px] sm:leading-8">
               {about.intro}
             </p>
             <ButtonLink
@@ -48,7 +48,7 @@ export function AboutView() {
               <div className="relative aspect-[5/4]">
                 <Image
                   src="/images/hero-workplace.jpg"
-                  alt="AQS Technologies workplace"
+                  alt="AQS Technologies LLC workplace"
                   fill
                   priority
                   sizes="(min-width: 1024px) 42vw, 90vw"
@@ -94,17 +94,9 @@ export function AboutView() {
       <section className="bg-white py-14 sm:py-20">
         <Container className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal shift>
-            <p className="text-[11px] font-semibold tracking-[0.24em] text-aqs-red uppercase">
-              {about.storyEyebrow}
+            <p className="text-base leading-8 text-aqs-muted">
+              {about.story}
             </p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-aqs-navy">
-              {about.storyTitle}
-            </h2>
-            {about.story.map((paragraph) => (
-              <p key={paragraph} className="mt-5 text-sm leading-7 text-aqs-muted">
-                {paragraph}
-              </p>
-            ))}
             <ButtonLink
               href="/products"
               className="shine mt-8 gap-2 shadow-[0_12px_28px_rgba(227,28,35,0.22)] transition-transform hover:-translate-y-0.5"
@@ -117,14 +109,14 @@ export function AboutView() {
               <div className="relative aspect-[16/11]">
                 <Image
                   src="/images/hero-workplace.jpg"
-                  alt="Modern workplace supported by AQS Technologies"
+                  alt="Modern workplace supported by AQS Technologies LLC"
                   fill
                   sizes="(min-width: 1024px) 48vw, 90vw"
                   className="img-zoom object-cover object-[center_40%]"
                 />
               </div>
             </Tilt>
-            <div className="mt-4 space-y-1 rounded-2xl border border-black/6 bg-white/95 p-4 shadow-[0_16px_40px_rgba(11,31,58,0.1)] backdrop-blur-md lg:absolute lg:top-1/2 lg:right-0 lg:mt-0 lg:w-[258px] lg:-translate-y-1/2">
+            <div className="mt-4 space-y-1 rounded-2xl border border-black/6 bg-white/95 p-4 shadow-[0_16px_40px_rgba(11,31,58,0.1)] backdrop-blur-md lg:absolute lg:top-1/2 lg:right-0 lg:mt-0 lg:w-[280px] lg:-translate-y-1/2">
               {about.highlights.map((item) => (
                 <p
                   key={item}
@@ -138,6 +130,33 @@ export function AboutView() {
               ))}
             </div>
           </Reveal>
+        </Container>
+      </section>
+
+      <section className="bg-[#f6f7f9] py-14 sm:py-20">
+        <Container>
+          <div className="grid items-stretch gap-6 lg:grid-cols-2">
+            <Reveal shift>
+              <article className="flex h-full flex-col rounded-[28px] border border-black/6 bg-white p-8 sm:p-10">
+                <h2 className="text-3xl font-semibold tracking-tight text-aqs-navy sm:text-4xl">
+                  Vision
+                </h2>
+                <p className="mt-5 text-sm leading-7 text-aqs-muted sm:text-base sm:leading-8">
+                  {about.vision}
+                </p>
+              </article>
+            </Reveal>
+            <Reveal delay={100} shift>
+              <article className="flex h-full flex-col rounded-[28px] border border-black/6 bg-white p-8 sm:p-10">
+                <h2 className="text-3xl font-semibold tracking-tight text-aqs-navy sm:text-4xl">
+                  Mission
+                </h2>
+                <p className="mt-5 text-sm leading-7 text-aqs-muted sm:text-base sm:leading-8">
+                  {about.mission}
+                </p>
+              </article>
+            </Reveal>
+          </div>
         </Container>
       </section>
 
@@ -249,7 +268,6 @@ export function AboutView() {
         <Container className="relative">
           <Reveal shift className="mx-auto max-w-3xl text-center">
             <h2 className="text-4xl font-semibold tracking-tight">{about.whyTitle}</h2>
-            <p className="mt-4 text-sm leading-7 text-white/70">{about.whyIntro}</p>
           </Reveal>
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {about.why.map((item, index) => (
@@ -328,7 +346,7 @@ export function AboutView() {
               <div className="relative aspect-[16/11]">
                 <Image
                   src="/images/cta-dubai.jpg"
-                  alt="AQS Technologies serving businesses across Dubai and the region"
+                  alt="AQS Technologies LLC serving businesses across Dubai and the region"
                   fill
                   sizes="(min-width: 1024px) 45vw, 90vw"
                   className="img-zoom object-cover object-center"

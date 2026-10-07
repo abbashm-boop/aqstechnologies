@@ -95,11 +95,11 @@ export function SiteHeader() {
   }
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-[70] [overflow-anchor:none] bg-white">
+    <header ref={headerRef} className="sticky top-0 z-[70] overflow-visible [overflow-anchor:none] bg-white">
       <div className="bg-aqs-navy text-white">
         <Container className="flex h-9 items-center justify-between gap-6 text-[12px] sm:h-10">
           <p className="truncate font-medium">{siteConfig.tagline}</p>
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden min-w-0 items-center gap-3 xl:flex">
             <span>{siteConfig.contact.location}</span>
             <span className="text-white/30">|</span>
             <a href={siteConfig.contact.phoneHref} className="hover:text-white/80">
@@ -138,22 +138,22 @@ export function SiteHeader() {
 
       <div
         ref={barRef}
-        className="relative overflow-x-clip border-b border-black/8 bg-white"
+        className="relative border-b border-black/8 bg-white"
         onMouseLeave={closeSoon}
       >
-        <Container className="flex h-[68px] min-w-0 items-center gap-2 overflow-x-clip sm:h-[80px] sm:gap-4">
-          <Link href="/" className="shrink-0" aria-label={siteConfig.legalName}>
+        <Container className="flex h-[76px] min-w-0 items-center gap-3 overflow-visible sm:h-[92px] sm:gap-4">
+          <Link href="/" className="relative z-10 shrink-0 overflow-visible" aria-label={siteConfig.legalName}>
             <Image
               src="/brand/logo.png"
               alt={siteConfig.legalName}
-              width={320}
-              height={104}
+              width={900}
+              height={351}
               priority
-              className="h-9 w-auto max-w-[110px] object-contain sm:h-[52px] sm:max-w-[200px]"
+              className="h-12 w-auto overflow-visible object-contain object-left sm:h-14 xl:h-16"
             />
           </Link>
 
-          <nav className="ml-8 hidden items-center gap-4 lg:ml-12 lg:flex" aria-label="Main">
+          <nav className="hidden min-w-0 flex-1 items-center justify-end gap-1 xl:flex" aria-label="Main">
             {siteConfig.nav.map((item) => {
               const hasMenu = "menu" in item && Boolean(item.menu);
               const active = isActive(item.href);
@@ -166,7 +166,7 @@ export function SiteHeader() {
                     href={item.href}
                     onMouseEnter={closeNow}
                     className={cn(
-                      "rounded-full px-4 py-2 text-[13px] font-semibold whitespace-nowrap transition-colors",
+                      "rounded-full px-2.5 py-2 text-[13px] font-semibold whitespace-nowrap transition-colors xl:px-3.5",
                       active
                         ? "bg-aqs-red text-white"
                         : "text-aqs-navy hover:bg-black/5 hover:text-aqs-red",
@@ -184,7 +184,7 @@ export function SiteHeader() {
                   onMouseEnter={() => open(item.menu)}
                   onClick={() => open(item.menu)}
                   className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-semibold whitespace-nowrap transition-colors",
+                    "inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-[13px] font-semibold whitespace-nowrap transition-colors xl:gap-1.5 xl:px-3.5",
                     active || menuOpen
                       ? "bg-aqs-red text-white"
                       : "text-aqs-navy hover:bg-black/5 hover:text-aqs-red",
@@ -202,11 +202,11 @@ export function SiteHeader() {
             query={query}
             setQuery={setQuery}
             onSearch={onSearch}
-            className="ml-auto hidden min-w-0 lg:block lg:w-[240px] lg:flex-none"
+            className="ml-auto hidden min-w-0 xl:block xl:w-[180px] xl:flex-none 2xl:w-[220px]"
           />
           <button
             type="button"
-            className="ml-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 lg:hidden"
+            className="ml-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 xl:hidden"
             aria-label={mobileSearch ? "Close search" : "Search products"}
             aria-expanded={mobileSearch}
             onClick={() => {
@@ -220,13 +220,13 @@ export function SiteHeader() {
           <Link
             href="/contact"
             onMouseEnter={closeNow}
-            className="hidden h-10 shrink-0 items-center rounded-full bg-aqs-red px-4 text-[13px] font-semibold whitespace-nowrap text-white hover:bg-aqs-red-hover lg:inline-flex"
+            className="hidden h-10 shrink-0 items-center rounded-full bg-aqs-red px-4 text-[13px] font-semibold whitespace-nowrap text-white hover:bg-aqs-red-hover xl:inline-flex"
           >
             Request a Quote
           </Link>
           <button
             type="button"
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 lg:hidden"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 xl:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={(event) => {
@@ -242,7 +242,7 @@ export function SiteHeader() {
         </Container>
 
         {mobileSearch ? (
-          <div className="border-t border-black/8 bg-white px-5 py-3 lg:hidden">
+          <div className="border-t border-black/8 bg-white px-5 py-3 xl:hidden">
             <SearchField query={query} setQuery={setQuery} onSearch={onSearch} autoFocus />
           </div>
         ) : null}
@@ -262,7 +262,7 @@ export function SiteHeader() {
       {mobileOpen
         ? createPortal(
             <div
-              className="fixed inset-x-0 z-[60] overflow-x-clip overflow-y-auto overscroll-contain border-t border-black/8 bg-white lg:hidden"
+              className="fixed inset-x-0 z-[60] overflow-x-clip overflow-y-auto overscroll-contain border-t border-black/8 bg-white xl:hidden"
               style={{ top: drawerTop, bottom: 0 }}
             >
               <Container className="flex flex-col gap-1 py-4 pb-24">
@@ -367,7 +367,7 @@ function MegaWrap({
 }) {
   return (
     <div
-      className="absolute inset-x-0 top-full z-40 -mt-px hidden border-t border-black/8 bg-white shadow-[0_18px_40px_rgba(11,31,58,0.12)] lg:block"
+      className="absolute inset-x-0 top-full z-40 -mt-px hidden border-t border-black/8 bg-white shadow-[0_18px_40px_rgba(11,31,58,0.12)] xl:block"
       onMouseEnter={onMouseEnter}
     >
       <Container className="py-6">{children}</Container>
@@ -392,13 +392,13 @@ function ProductsMega({ onNavigate }: { onNavigate: () => void }) {
               {category.title}
             </p>
           </Link>
-          <ul className="mt-2 space-y-1.5">
+          <ul className="mt-3 space-y-1.5">
             {category.links.map((link) => (
               <li key={link.label}>
                 <Link
                   href={link.href}
                   onClick={onNavigate}
-                  className="block text-[13px] leading-5 text-aqs-muted hover:text-aqs-red"
+                  className="block rounded-lg py-0.5 text-[13px] leading-5 text-aqs-muted hover:bg-[#f6f8fb] hover:text-aqs-red"
                 >
                   {link.label}
                 </Link>
@@ -419,9 +419,18 @@ function MobileProducts({ onNavigate }: { onNavigate: () => void }) {
           <Link
             href={category.href}
             onClick={onNavigate}
-            className="block text-sm font-semibold text-aqs-navy"
+            className="flex items-center gap-3"
           >
-            {category.title}
+            <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-black/6 bg-white">
+              <Image
+                src={category.image}
+                alt=""
+                fill
+                sizes="48px"
+                className="object-contain p-1"
+              />
+            </span>
+            <span className="text-sm font-semibold text-aqs-navy">{category.title}</span>
           </Link>
           <ul className="mt-1.5 space-y-1">
             {category.links.map((link) => (
