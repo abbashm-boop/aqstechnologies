@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-import { HeroHologram } from "@/components/home/hero-hologram";
+import { HeroWave } from "@/components/home/hero-wave";
 import { Tilt } from "@/components/home/tilt";
 import { BrandLogo } from "@/components/ui/brand-logo";
 import { Container } from "@/components/ui/container";
@@ -15,33 +15,13 @@ import { siteConfig } from "@/config/site";
 
 export function HomeView() {
   const brandLoop = [...siteConfig.partners, ...siteConfig.partners];
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const heroMediaRef = useRef<HTMLDivElement>(null);
   const ctaMediaRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = true;
-    const play = () => {
-      void video.play().catch(() => undefined);
-    };
-    play();
-    video.addEventListener("canplay", play);
-    return () => video.removeEventListener("canplay", play);
-  }, []);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     return subscribeScroll(() => {
       if (media.matches) return;
-      const y = window.scrollY;
-      const hero = heroMediaRef.current;
-      if (hero) {
-        hero.style.transform = `translate3d(0, ${y * 0.32}px, 0) scale(1.12)`;
-      }
-
       const cta = ctaMediaRef.current;
       if (cta) {
         const rect = cta.getBoundingClientRect();
@@ -53,72 +33,7 @@ export function HomeView() {
 
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div className="relative min-h-[460px] overflow-hidden lg:min-h-[500px]">
-          <div ref={heroMediaRef} className="hero-media absolute inset-0">
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              poster="/images/hero-workplace.jpg"
-              aria-hidden
-              className="absolute inset-0 h-full w-full object-cover object-center motion-reduce:hidden"
-            >
-              <source src="/hero.mp4" type="video/mp4" />
-            </video>
-            <Image
-              src="/images/hero-workplace.jpg"
-              alt=""
-              fill
-              priority
-              className="hidden object-cover object-[center_35%] motion-reduce:block"
-            />
-          </div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(227,28,35,0.18),transparent_28%),linear-gradient(90deg,#050d18_0%,rgba(5,13,24,0.72)_38%,rgba(5,13,24,0.42)_100%)]" />
-          <Container className="relative z-10 grid min-h-[460px] items-start gap-5 pt-7 pb-8 lg:min-h-[500px] lg:grid-cols-2 lg:gap-8 lg:pt-8 lg:pb-8">
-            <div className="max-w-xl text-white animate-fade-up">
-              <p className="inline-flex items-center rounded-full border border-aqs-red/40 bg-aqs-red/15 px-3 py-1 text-[11px] font-semibold tracking-[0.22em] text-white uppercase shadow-[0_0_18px_rgba(227,28,35,0.28)]">
-                {siteConfig.legalName}
-              </p>
-              <h1 className="mt-3 text-[32px] font-semibold tracking-tight text-white sm:text-[40px] sm:leading-[1.12] lg:text-[42px] lg:leading-[1.1]">
-                Trusted Technology Products for Modern Workplaces
-              </h1>
-              <p className="mt-3 max-w-md text-[14px] leading-6 text-white/72">
-                {siteConfig.description}
-              </p>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/contact"
-                  className="shine inline-flex h-11 items-center rounded-full bg-aqs-red px-6 text-[13px] font-semibold text-white shadow-[0_12px_30px_rgba(227,28,35,0.35)] transition-transform hover:-translate-y-0.5"
-                >
-                  Request a Quote
-                </Link>
-                <Link
-                  href="/products"
-                  className="inline-flex h-11 items-center rounded-full border border-white/22 bg-white/8 px-6 text-[13px] font-semibold text-white backdrop-blur-md transition-colors hover:border-white/40 hover:bg-white/12"
-                >
-                  View Products
-                </Link>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {siteConfig.heroHighlights.map((item, index) => (
-                  <span
-                    key={item.title}
-                    className="animate-fade-up rounded-full border border-white/12 bg-black/20 px-3 py-1.5 text-[11px] font-medium tracking-wide text-white/80"
-                    style={{ animationDelay: `${180 + index * 90}ms` }}
-                  >
-                    {item.title}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <HeroHologram />
-          </Container>
-        </div>
-      </section>
+      <HeroWave />
 
       <section className="py-14 sm:py-24">
         <Container>

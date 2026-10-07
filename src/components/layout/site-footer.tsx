@@ -9,8 +9,8 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto w-full border-t border-black/8 bg-white text-aqs-navy">
       <Container className="py-12 sm:py-14">
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-          <div className="col-span-2 min-w-0 lg:col-span-1">
+        <div className="grid grid-cols-2 items-start gap-x-12 gap-y-10 lg:flex lg:flex-row lg:justify-between lg:gap-x-16">
+          <div className="col-span-2 min-w-0 lg:max-w-[260px] lg:flex-none">
             <Link href="/" className="inline-block">
               <Image
                 src="/brand/logo.png"

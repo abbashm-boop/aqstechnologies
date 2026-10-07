@@ -50,6 +50,9 @@ export default async function ProductPage({
         description={`${product.spec}. Genuine ${product.label.toLowerCase()} supplied and distributed by AQS Technologies across the UAE and region.`}
         image={product.image}
         imageAlt={product.label}
+        holoSlug={category.slug}
+        holoTitle={product.label}
+        holoLine={product.spec}
         quoteTitle={`Need ${product.label}?`}
         quoteText={`Share your specification and our team will help with availability, pricing, and the right ${category.title.toLowerCase()} setup.`}
         crumbs={[

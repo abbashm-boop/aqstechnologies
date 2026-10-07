@@ -44,6 +44,7 @@ export default async function CategoryPage({
         description={category.blurb}
         image={category.image}
         imageAlt={category.title}
+        holoSlug={category.slug}
         quoteTitle={`Need ${category.title}?`}
         quoteText="Share your specification and our team will help with availability, pricing, and the right setup for your project."
         crumbs={[

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import { HeroHologram } from "@/components/home/hero-hologram";
 import { Container } from "@/components/ui/container";
 
 type Crumb = { href: string; label: string };
@@ -10,40 +10,37 @@ export function CatalogHero({
   title,
   description,
   image,
-  imageAlt,
   crumbs,
   logo = "/brand/logo.png",
   logoAlt = "AQS Technologies",
   quoteTitle,
   quoteText,
+  holoSlug,
+  holoTitle,
+  holoLine,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   image: string;
-  imageAlt: string;
+  imageAlt?: string;
   crumbs: Crumb[];
   logo?: string;
   logoAlt?: string;
   quoteTitle?: string;
   quoteText?: string;
+  holoSlug?: string;
+  holoTitle?: string;
+  holoLine?: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-aqs-navy text-white">
-      <Image
-        src={image}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center opacity-[0.14]"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-aqs-navy via-aqs-navy/94 to-[#132a4a]/88" />
-      <div className="pointer-events-none absolute -right-10 -top-8 h-52 w-52 rounded-full bg-aqs-red/22 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-40px] left-[28%] h-36 w-36 rounded-full bg-[#f0d48a]/18 blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_48%,rgba(240,212,138,0.16),transparent_34%),radial-gradient(circle_at_18%_20%,rgba(227,28,35,0.18),transparent_32%),linear-gradient(90deg,#07111f_0%,#0b1f3a_46%,#102844_100%)]" />
+      <div className="pointer-events-none absolute -right-10 -top-8 h-52 w-52 rounded-full bg-aqs-red/18 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-[-40px] left-[28%] h-36 w-36 rounded-full bg-[#f0d48a]/16 blur-3xl" />
 
-      <Container className="relative grid items-center gap-8 py-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-9">
-        <div>
+      <Container className="relative grid items-center gap-6 py-8 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-6 lg:py-6">
+        <div className="min-w-0 lg:pl-6">
           <div className="flex items-center gap-4">
             <div className="rounded-xl bg-white px-3 py-2 shadow-[0_10px_24px_rgba(0,0,0,0.18)]">
               <img
@@ -104,20 +101,13 @@ export function CatalogHero({
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[400px]">
-          <div className="absolute inset-5 rounded-[32px] bg-[#f0d48a]/20 blur-2xl" />
-          <div className="relative overflow-hidden rounded-[28px] border border-white/12 bg-white p-4 shadow-[0_20px_50px_rgba(0,0,0,0.28)]">
-            <div className="relative aspect-[4/3]">
-              <Image
-                src={image}
-                alt={imageAlt}
-                fill
-                sizes="(min-width: 1024px) 26vw, 80vw"
-                className="object-contain object-center"
-                priority
-              />
-            </div>
-          </div>
+        <div className="flex w-full justify-center">
+          <HeroHologram
+            initialSlug={holoSlug}
+            image={holoSlug ? image : undefined}
+            title={holoTitle}
+            line={holoLine}
+          />
         </div>
       </Container>
     </section>

@@ -71,13 +71,33 @@ function IconRack() {
 
 const ICONS = [IconAccess, IconAv, IconNet, IconRack];
 
-export function HeroHologram() {
-  const [active, setActive] = useState(0);
+export function HeroHologram({
+  className,
+  initialSlug,
+  image,
+  title,
+  line,
+}: {
+  className?: string;
+  initialSlug?: string;
+  image?: string;
+  title?: string;
+  line?: string;
+} = {}) {
+  const startIndex = Math.max(
+    0,
+    categories.findIndex((item) => item.slug === initialSlug),
+  );
+  const [active, setActive] = useState(startIndex);
   const [playId, setPlayId] = useState(0);
-  const [locked, setLocked] = useState(false);
+  const [locked, setLocked] = useState(Boolean(image || initialSlug));
   const [pressed, setPressed] = useState(false);
   const category = categories[active];
   const copy = CARD_COPY[active];
+  const featured = active === startIndex;
+  const displayTitle = featured && title ? title : copy.title;
+  const displayLine = featured && line ? line : copy.line;
+  const displayImage = featured && image ? image : category.image;
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -104,7 +124,7 @@ export function HeroHologram() {
   }
 
   return (
-    <div className="hero-holo-frame relative mx-auto w-full max-w-[520px]">
+    <div className={cn("hero-holo-frame relative mx-auto w-full max-w-[520px]", className)}>
       <div key={playId} className="hero-holo">
         <article className="hero-holo-card">
           <span className="hero-holo-bracket" aria-hidden />
@@ -116,16 +136,16 @@ export function HeroHologram() {
             ))}
           </p>
           <h3
-            className="hero-holo-line text-[14px] font-semibold tracking-tight text-white"
+            className="hero-holo-line line-clamp-2 text-[14px] font-semibold tracking-tight text-white"
             style={{ animationDelay: "420ms" }}
           >
-            {copy.title}
+            {displayTitle}
           </h3>
           <p
-            className="hero-holo-line mt-1 text-[11px] leading-4 text-white/70"
+            className="hero-holo-line mt-1 line-clamp-2 text-[11px] leading-4 text-white/70"
             style={{ animationDelay: "560ms" }}
           >
-            {copy.line}
+            {displayLine}
           </p>
         </article>
 
@@ -155,11 +175,11 @@ export function HeroHologram() {
           <div className="hero-holo-product">
             <div className="hero-holo-product-float">
               <Image
-                src={category.image}
-                alt={category.title}
+                src={displayImage}
+                alt={displayTitle}
                 width={480}
                 height={360}
-                priority={active === 0}
+                priority
                 className="h-full w-full object-contain"
               />
               <span className="hero-holo-sweep" aria-hidden />
