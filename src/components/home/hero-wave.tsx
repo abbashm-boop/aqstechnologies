@@ -65,10 +65,7 @@ export function HeroWave() {
     video.addEventListener("canplay", play);
     document.addEventListener("visibilitychange", play);
 
-    const tickKey = "__aqsHeroPalmTick";
-    const win = window as Window & Record<string, number | undefined>;
-    if (win[tickKey]) window.cancelAnimationFrame(win[tickKey]);
-
+    let raf = 0;
     let passedClose = false;
     let inFar = true;
     const tick = () => {
@@ -94,13 +91,12 @@ export function HeroWave() {
         card.style.marginTop = `${-size}px`;
         card.style.marginLeft = `${-36 + 16 * amount}px`;
       }
-      win[tickKey] = window.requestAnimationFrame(tick);
+      raf = window.requestAnimationFrame(tick);
     };
-    win[tickKey] = window.requestAnimationFrame(tick);
+    raf = window.requestAnimationFrame(tick);
 
     return () => {
-      if (win[tickKey]) window.cancelAnimationFrame(win[tickKey]);
-      win[tickKey] = undefined;
+      window.cancelAnimationFrame(raf);
       video.removeEventListener("canplay", play);
       document.removeEventListener("visibilitychange", play);
     };
