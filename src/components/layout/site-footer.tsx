@@ -9,8 +9,8 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto w-full border-t border-black/8 bg-white text-aqs-navy">
       <Container className="py-12 sm:py-14">
-        <div className="grid grid-cols-2 items-start gap-x-12 gap-y-10 lg:flex lg:flex-row lg:justify-between lg:gap-x-16">
-          <div className="col-span-2 min-w-0 lg:max-w-[260px] lg:flex-none">
+        <div className="grid grid-cols-2 items-start gap-x-12 gap-y-10 md:grid-cols-4 md:gap-x-12 lg:gap-x-16">
+          <div className="col-span-2 min-w-0 md:col-span-1">
             <Link href="/" className="inline-block">
               <Image
                 src="/brand/logo.png"
@@ -20,7 +20,7 @@ export function SiteFooter() {
                 className="h-11 w-auto sm:h-12"
               />
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-aqs-muted">
+            <p className="mt-4 text-sm leading-6 text-aqs-muted">
               {siteConfig.footer.blurb}
             </p>
             <div className="mt-4 flex items-center gap-3">
