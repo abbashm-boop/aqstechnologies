@@ -97,7 +97,7 @@ export function SiteHeader() {
   return (
     <header ref={headerRef} className="sticky top-0 z-[70] overflow-visible [overflow-anchor:none] bg-white">
       <div className="bg-aqs-navy text-white">
-        <Container className="flex h-9 items-center justify-between gap-6 text-[12px] sm:h-10">
+        <div className="mx-auto flex h-9 w-full max-w-[1280px] items-center justify-between gap-6 px-6 text-[12px] sm:h-10 lg:px-10">
           <p className="truncate font-medium">{siteConfig.tagline}</p>
           <div className="hidden min-w-0 items-center gap-3 xl:flex">
             <span>{siteConfig.contact.location}</span>
@@ -133,7 +133,7 @@ export function SiteHeader() {
               <WhatsAppIcon className="h-3.5 w-3.5" />
             </a>
           </div>
-        </Container>
+        </div>
       </div>
 
       <div
@@ -141,19 +141,19 @@ export function SiteHeader() {
         className="relative border-b border-black/8 bg-white"
         onMouseLeave={closeSoon}
       >
-        <Container className="flex h-[76px] min-w-0 items-center gap-3 overflow-visible sm:h-[92px] sm:gap-4">
-          <Link href="/" className="relative z-10 shrink-0 overflow-visible" aria-label={siteConfig.legalName}>
+        <div className="mx-auto flex h-[76px] w-full min-w-0 max-w-[1280px] items-center px-6 sm:h-[92px] lg:px-10">
+          <Link href="/" className="relative z-10 shrink-0" aria-label={siteConfig.legalName}>
             <Image
               src="/brand/logo.png"
               alt={siteConfig.legalName}
               width={900}
               height={351}
               priority
-              className="h-12 w-auto overflow-visible object-contain object-left sm:h-14 xl:h-16"
+              className="block h-12 w-auto object-contain object-left sm:h-14 xl:h-16"
             />
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-end gap-1 xl:flex" aria-label="Main">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 xl:flex" aria-label="Main">
             {siteConfig.nav.map((item) => {
               const hasMenu = "menu" in item && Boolean(item.menu);
               const active = isActive(item.href);
@@ -198,48 +198,50 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <SearchField
-            query={query}
-            setQuery={setQuery}
-            onSearch={onSearch}
-            className="ml-auto hidden min-w-0 xl:block xl:w-[180px] xl:flex-none 2xl:w-[220px]"
-          />
-          <button
-            type="button"
-            className="ml-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 xl:hidden"
-            aria-label={mobileSearch ? "Close search" : "Search products"}
-            aria-expanded={mobileSearch}
-            onClick={() => {
-              setMobileSearch((open) => !open);
-              setMobileOpen(false);
-              closeNow();
-            }}
-          >
-            {mobileSearch ? <CloseIcon /> : <SearchIcon className="h-[18px] w-[18px]" />}
-          </button>
-          <Link
-            href="/contact"
-            onMouseEnter={closeNow}
-            className="hidden h-10 shrink-0 items-center rounded-full bg-aqs-red px-4 text-[13px] font-semibold whitespace-nowrap text-white hover:bg-aqs-red-hover xl:inline-flex"
-          >
-            Request a Quote
-          </Link>
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 xl:hidden"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              setMobileOpen((open) => !open);
-              setMobileSearch(false);
-              closeNow();
-            }}
-          >
-            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-          </button>
-        </Container>
+          <div className="ml-auto flex shrink-0 items-center gap-2.5 xl:ml-0">
+            <SearchField
+              query={query}
+              setQuery={setQuery}
+              onSearch={onSearch}
+              className="hidden min-w-0 xl:block xl:w-[180px] xl:flex-none 2xl:w-[200px]"
+            />
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 xl:hidden"
+              aria-label={mobileSearch ? "Close search" : "Search products"}
+              aria-expanded={mobileSearch}
+              onClick={() => {
+                setMobileSearch((open) => !open);
+                setMobileOpen(false);
+                closeNow();
+              }}
+            >
+              {mobileSearch ? <CloseIcon /> : <SearchIcon className="h-[18px] w-[18px]" />}
+            </button>
+            <Link
+              href="/contact"
+              onMouseEnter={closeNow}
+              className="hidden h-10 shrink-0 items-center rounded-full bg-aqs-red px-4 text-[13px] font-semibold whitespace-nowrap text-white hover:bg-aqs-red-hover xl:inline-flex"
+            >
+              Request a Quote
+            </Link>
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 xl:hidden"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                setMobileOpen((open) => !open);
+                setMobileSearch(false);
+                closeNow();
+              }}
+            >
+              {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+            </button>
+          </div>
+        </div>
 
         {mobileSearch ? (
           <div className="border-t border-black/8 bg-white px-5 py-3 xl:hidden">
@@ -370,7 +372,7 @@ function MegaWrap({
       className="absolute inset-x-0 top-full z-40 -mt-px hidden border-t border-black/8 bg-white shadow-[0_18px_40px_rgba(11,31,58,0.12)] xl:block"
       onMouseEnter={onMouseEnter}
     >
-      <Container className="py-6">{children}</Container>
+      <div className="mx-auto w-full max-w-[1280px] px-6 py-6 lg:px-10">{children}</div>
     </div>
   );
 }
