@@ -209,6 +209,36 @@ body {
   transform: translate3d(0, 0, 0) scale(1.12);
 }
 
+.hero-slider-veil {
+  background: linear-gradient(90deg, rgb(7 21 38 / 0.28) 0%, transparent 46%);
+}
+
+.hero-slider-panel {
+  background: linear-gradient(
+    118deg,
+    #0b1f3a 0%,
+    #163a73 48%,
+    #1e4f9a 100%
+  );
+  clip-path: polygon(0 0, 82% 0, 58% 100%, 0 100%);
+  opacity: 0.9;
+}
+
+.hero-slider-copy {
+  animation: hero-slider-copy 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes hero-slider-copy {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .hero-wave {
   background:
     radial-gradient(ellipse at 50% 42%, #2436a8 0%, #10183a 42%, #070b18 78%);
@@ -1238,6 +1268,7 @@ body {
   .img-zoom,
   .process-line,
   .hero-media,
+  .hero-slider-copy,
   .hero-wave-bg,
   .hero-wave-girl,
   .hero-wave-frame.is-up,

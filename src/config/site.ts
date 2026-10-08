@@ -234,10 +234,10 @@ export const siteConfig = {
       categorySlugs: ["access-control"],
     },
     {
-      name: "Trend",
+      name: "TREND",
       slug: "trend",
       description: "Network and cable testing solutions.",
-      aboutLine: "Network Testing Solutions",
+      aboutLine: "TREND by STEPWELL",
       href: "/products?brand=trend",
       logo: "/brands/trend.png",
       categorySlugs: ["networking"],

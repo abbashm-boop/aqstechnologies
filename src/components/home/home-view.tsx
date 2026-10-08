@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-import { HeroWave } from "@/components/home/hero-wave";
+import { HeroSlider } from "@/components/home/hero-slider";
 import { Tilt } from "@/components/home/tilt";
 import { BrandLogo } from "@/components/ui/brand-logo";
 import { Container } from "@/components/ui/container";
@@ -33,7 +33,7 @@ export function HomeView() {
 
   return (
     <>
-      <HeroWave />
+      <HeroSlider />
 
       <section className="py-14 sm:py-24">
         <Container>
