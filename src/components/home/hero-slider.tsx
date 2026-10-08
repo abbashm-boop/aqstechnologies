@@ -78,31 +78,33 @@ export function HeroSlider() {
       aria-roledescription="carousel"
       aria-label="AQS Technologies highlights"
     >
-      <div className="relative min-h-[400px] sm:min-h-[460px] lg:min-h-[520px]">
-        {slides.map((item, i) => (
-          <div
-            key={item.image}
-            className={cn(
-              "absolute inset-0 transition-opacity duration-700",
-              i === index ? "opacity-100" : "opacity-0",
-            )}
-            aria-hidden={i !== index}
-          >
-            <Image
-              src={item.image}
-              alt=""
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-          </div>
-        ))}
+      <div className="relative sm:min-h-[460px] lg:min-h-[520px]">
+        <div className="relative h-[210px] sm:absolute sm:inset-0 sm:h-auto">
+          {slides.map((item, i) => (
+            <div
+              key={item.image}
+              className={cn(
+                "absolute inset-0 transition-opacity duration-700",
+                i === index ? "opacity-100" : "opacity-0",
+              )}
+              aria-hidden={i !== index}
+            >
+              <Image
+                src={item.image}
+                alt=""
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className="object-cover object-[center_30%] sm:object-center"
+              />
+            </div>
+          ))}
+        </div>
 
-        <div className="hero-slider-veil pointer-events-none absolute inset-0" />
-        <div className="hero-slider-panel pointer-events-none absolute inset-y-0 left-0 w-[72%] sm:w-[54%] lg:w-[42%]" />
+        <div className="hero-slider-veil pointer-events-none absolute inset-0 hidden sm:block" />
+        <div className="hero-slider-panel pointer-events-none absolute inset-y-0 left-0 hidden w-[54%] sm:block lg:w-[42%]" />
 
-        <div className="relative z-10 flex min-h-[400px] items-start px-6 pt-10 sm:min-h-[460px] sm:px-10 sm:pt-12 lg:min-h-[520px] lg:px-12 lg:pt-14">
+        <div className="relative z-10 bg-aqs-navy px-5 pt-6 pb-[72px] sm:flex sm:min-h-[460px] sm:items-start sm:bg-transparent sm:px-10 sm:pt-12 sm:pb-0 lg:min-h-[520px] lg:px-12 lg:pt-14">
           <div key={slide.title} className="hero-slider-copy max-w-lg text-white">
             {slide.logo ? (
               <span className="mb-3 inline-flex h-9 items-center rounded-lg bg-white px-3">
@@ -113,7 +115,7 @@ export function HeroSlider() {
                 {slide.eyebrow}
               </p>
             )}
-            <h1 className="mt-2 text-[24px] font-semibold tracking-tight sm:text-[34px] sm:leading-[1.12]">
+            <h1 className="mt-2 text-[22px] leading-[1.2] font-semibold tracking-tight sm:text-[34px] sm:leading-[1.12]">
               {slide.title}
             </h1>
             <p className="mt-2 max-w-md text-[14px] leading-6 text-white/88 sm:text-[15px]">
@@ -128,16 +130,16 @@ export function HeroSlider() {
           </div>
         </div>
 
-        <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 sm:bottom-7">
+        <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2.5 sm:bottom-7 sm:gap-3">
           <button
             type="button"
             aria-label="Previous slide"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/92 text-aqs-navy shadow-[0_8px_20px_rgba(11,31,58,0.18)] transition hover:bg-white"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white/92 text-aqs-navy shadow-[0_8px_20px_rgba(11,31,58,0.18)] transition hover:bg-white sm:h-10 sm:w-10"
             onClick={() => go(index - 1)}
           >
             <ArrowLeft />
           </button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {slides.map((item, i) => (
               <button
                 key={item.image}
@@ -146,7 +148,7 @@ export function HeroSlider() {
                 aria-current={i === index ? true : undefined}
                 className={cn(
                   "h-2 rounded-full transition-all",
-                  i === index ? "w-8 bg-white" : "w-2 bg-white/45 hover:bg-white/70",
+                  i === index ? "w-6 bg-white sm:w-8" : "w-2 bg-white/45 hover:bg-white/70",
                 )}
                 onClick={() => go(i)}
               />
@@ -155,7 +157,7 @@ export function HeroSlider() {
           <button
             type="button"
             aria-label="Next slide"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/92 text-aqs-navy shadow-[0_8px_20px_rgba(11,31,58,0.18)] transition hover:bg-white"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white/92 text-aqs-navy shadow-[0_8px_20px_rgba(11,31,58,0.18)] transition hover:bg-white sm:h-10 sm:w-10"
             onClick={() => go(index + 1)}
           >
             <ArrowRight />
