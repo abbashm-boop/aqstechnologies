@@ -7,7 +7,17 @@ import { useCallback, useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
-const slides = [
+type Slide = {
+  image: string;
+  eyebrow: string;
+  title: string;
+  line: string;
+  href: string;
+  cta: string;
+  logo?: string;
+};
+
+const slides: Slide[] = [
   {
     image: "/images/hero-slide-intro.jpg",
     eyebrow: "AQS Technologies LLC",
@@ -52,7 +62,7 @@ const slides = [
     cta: "View KAYBE Products",
     logo: "/brands/kaybe.png",
   },
-] as const;
+];
 
 export function HeroSlider() {
   const [index, setIndex] = useState(0);
