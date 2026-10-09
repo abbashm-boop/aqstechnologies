@@ -39,7 +39,7 @@ export const siteConfig = {
       href: "/products/access-control",
       image: "/images/category-access-control-hid.png",
       blurb:
-        "HID readers, Seos credentials and Amico readers, plus Security Shells iSecure software.",
+        "HID readers, iCLASS and Vento cards, door locks, emergency break glass, and iSecure software.",
       aboutBlurb:
         "Reliable access control, identity and security solutions for modern workplaces.",
       links: [
@@ -67,6 +67,30 @@ export const siteConfig = {
           href: "/products/access-control/door-accessories",
           image: "/images/product-door.png",
           spec: "HID Amico biometric face readers",        },
+        {
+          label: "HID iCLASS",
+          slug: "hid-iclass",
+          href: "/products/access-control/hid-iclass",
+          image: "/images/product-hid-iclass-cards.png",
+          spec: "HID iCLASS cards and credentials",        },
+        {
+          label: "HID Vento Card",
+          slug: "hid-vento-card",
+          href: "/products/access-control/hid-vento-card",
+          image: "/images/product-hid-vento-card.png",
+          spec: "HID Vento access cards",        },
+        {
+          label: "Door Locks",
+          slug: "door-locks",
+          href: "/products/access-control/door-locks",
+          image: "/images/product-door-locks.png",
+          spec: "Electromagnetic door locks",        },
+        {
+          label: "Emergency Break Glass",
+          slug: "emergency-break-glass",
+          href: "/products/access-control/emergency-break-glass",
+          image: "/images/product-emergency-break-glass.png",
+          spec: "Emergency door release break glass",        },
         {
           label: "iSecure IAM",
           slug: "isecure-iam",
@@ -111,8 +135,8 @@ export const siteConfig = {
       href: "/products/audio-video",
       image: "/images/product-interactive-flat-screen-5.jpg",
       blurb:
-        "TREND interactive flat panels, video walls, conferencing cameras, room schedulers and lecture recording.",
-      aboutBlurb: "Interactive flat screens and conferencing displays.",
+        "TREND by STEPWELL interactive displays, conferencing, adapters, converters, mixers and splitters.",
+      aboutBlurb: "TREND by STEPWELL audio video solutions.",
       links: [
         {
           label: "Video Conferencing Display",
@@ -136,13 +160,6 @@ export const siteConfig = {
           spec: "TREND USB conference camera bar",
         },
         {
-          label: "4K Display",
-          slug: "4k-display",
-          href: "/products/audio-video/4k-display",
-          image: "/images/product-interactive-flat-screen-4.png",
-          spec: "TREND 4K interactive flat screen",
-        },
-        {
           label: "Wireless Screen Sharing",
           slug: "wireless-screen-sharing",
           href: "/products/audio-video/wireless-screen-sharing",
@@ -157,18 +174,39 @@ export const siteConfig = {
           spec: "TREND interactive flat panel D Series",
         },
         {
-          label: "Meeting Room Scheduler",
-          slug: "meeting-room-scheduler",
-          href: "/products/audio-video/meeting-room-scheduler",
-          image: "/images/product-meeting-room-scheduler.png",
-          spec: "TREND meeting room booking display",
-        },
-        {
           label: "Lecture Recording System",
           slug: "lecture-recording-system",
           href: "/products/audio-video/lecture-recording-system",
           image: "/images/product-lecture-recording-system.png",
           spec: "TREND lecture archiving system",
+        },
+        {
+          label: "Adapters",
+          slug: "adapters",
+          href: "/products/audio-video/adapters",
+          image: "/images/product-adapters.jpg",
+          spec: "TREND by STEPWELL Type-C, HDMI and USB adapters",
+        },
+        {
+          label: "Converters",
+          slug: "converters",
+          href: "/products/audio-video/converters",
+          image: "/images/product-converters.png",
+          spec: "TREND by STEPWELL HDMI and wireless converters",
+        },
+        {
+          label: "Mixers",
+          slug: "mixers",
+          href: "/products/audio-video/mixers",
+          image: "/images/product-mixers.jpg",
+          spec: "TREND by STEPWELL conference audio",
+        },
+        {
+          label: "Splitters",
+          slug: "splitters",
+          href: "/products/audio-video/splitters",
+          image: "/images/product-splitters.png",
+          spec: "TREND by STEPWELL multi-screen splitters",
         },
       ],
     },
@@ -354,7 +392,7 @@ export const siteConfig = {
   about: {
     eyebrow: "About Us",
     intro:
-      "Founded in 2022, AQS Technologies is a sister concern of AQS International Trading LLC, a dynamic and diversified independant distribution and supply company based in Dubai, UAE. With a strong commitment to excellence, we specialize in sourcing, importing, exporting, and distributing a wide range of high-quality products across various industries, including - Data & Communication Cables, Control Cables, LED Screens and AV Accessories, Access Control Readers / Controllers / Cards, Hard drives and more.",
+      "Founded in 2022, AQS Technologies is a sister concern of AQS International Trading LLC, a dynamic and diversified independant distribution and supply company based in Dubai, UAE. With a strong commitment to excellence, we specialize in sourcing, importing, exporting, and distributing a wide range of high-quality products across various industries, including - Data & Communication Cables, Control Cables, LED Screens and AV Accessories, Access Control Readers, Controllers, Cards, Hard drives and more.",
     story:
       "Over the years, we’ve built strong partnerships with manufacturers, suppliers, and system partners around the region, ensuring that our customers receive top-tier products at competitive prices.",
     stats: [
@@ -367,7 +405,7 @@ export const siteConfig = {
       "Data & Communication Cables",
       "Control Cables",
       "LED Screens and AV Accessories",
-      "Access Control Readers / Controllers / Cards",
+      "Access Control Readers, Controllers, Cards",
       "Hard drives and more",
     ],
     vision:

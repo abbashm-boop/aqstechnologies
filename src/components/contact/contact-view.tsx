@@ -46,33 +46,33 @@ export function ContactView({ topic }: { topic?: string }) {
         <div className="pointer-events-none absolute bottom-[-60px] left-[22%] h-40 w-40 rounded-full bg-[#f0d48a]/16 blur-3xl" />
 
         <div className="grid lg:grid-cols-2">
-          <div className="relative flex items-center px-5 py-12 sm:px-8 lg:py-16 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] lg:pr-12">
+          <div className="relative flex items-center px-5 py-8 sm:px-8 lg:py-10 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] lg:pr-12">
             <div className="w-full max-w-[560px] animate-fade-up">
               <p className="text-[11px] font-semibold tracking-[0.24em] text-[#f0d48a] uppercase">
                 Contact Us
               </p>
-              <h1 className="mt-3 text-[2rem] font-semibold tracking-tight sm:text-5xl sm:leading-[1.08]">
+              <h1 className="mt-2 text-[1.75rem] font-semibold tracking-tight sm:text-4xl sm:leading-[1.1]">
                 Get in Touch
               </h1>
-              <p className="mt-4 max-w-lg text-[15px] leading-7 text-white/72">
+              <p className="mt-2.5 max-w-lg text-[14px] leading-6 text-white/72">
                 We&apos;re here to help. Connect with our team for product
                 inquiries, pricing, partnerships or technical support.
               </p>
 
-              <div className="mt-9 grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-4 lg:gap-5">
+              <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-4 lg:gap-4">
                 {heroTopics.map((item) => (
                   <Link
                     key={item.title}
                     href={item.href}
                     className="group min-w-0"
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/8 text-[#ff6b6f] ring-1 ring-white/10 transition-colors group-hover:bg-aqs-red group-hover:text-white">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/8 text-[#ff6b6f] ring-1 ring-white/10 transition-colors group-hover:bg-aqs-red group-hover:text-white">
                       <TopicIcon name={item.icon} />
                     </span>
-                    <span className="mt-3 block text-[13px] font-semibold leading-5 text-white">
+                    <span className="mt-2 block text-[13px] font-semibold leading-4 text-white">
                       {item.title}
                     </span>
-                    <span className="mt-1 block text-[12px] leading-5 text-white/58">
+                    <span className="mt-0.5 block text-[12px] leading-4 text-white/58">
                       {item.text}
                     </span>
                   </Link>
@@ -81,23 +81,16 @@ export function ContactView({ topic }: { topic?: string }) {
             </div>
           </div>
 
-          <div className="relative min-h-[260px] sm:min-h-[340px] lg:min-h-[560px]">
+          <div className="relative min-h-[200px] sm:min-h-[260px] lg:min-h-[380px]">
             <Image
-              src="/images/contact-lobby.jpg"
+              src="/images/contact-office.jpg"
               alt="AQS Technologies office lobby in Dubai"
               fill
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover object-[78%_center]"
+              className="object-cover object-[68%_40%]"
             />
             <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-aqs-navy to-transparent lg:w-16" />
-            <div className="absolute top-[16%] right-[9%] hidden rounded-xl bg-white px-3 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.22)] lg:block">
-              <img
-                src="/brand/logo.png"
-                alt="AQS Technologies"
-                className="h-9 w-auto max-w-[140px] object-contain sm:h-11"
-              />
-            </div>
           </div>
         </div>
       </section>

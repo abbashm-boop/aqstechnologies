@@ -155,8 +155,8 @@ export function SiteHeader() {
             <Image
               src="/brand/logo.png"
               alt={siteConfig.legalName}
-              width={900}
-              height={351}
+              width={1041}
+              height={374}
               priority
               className="block h-16 w-auto object-contain object-left sm:h-[72px] xl:h-20"
             />
@@ -393,41 +393,46 @@ function MegaWrap({
       className="absolute inset-x-0 top-full z-40 -mt-px hidden border-t border-black/8 bg-white shadow-[0_18px_40px_rgba(11,31,58,0.12)] lg:block"
       onMouseEnter={onMouseEnter}
     >
-      <div className="mx-auto w-full max-w-[1280px] px-5 py-5 lg:px-8">{children}</div>
+      <div className="mx-auto w-full max-w-[1280px] px-5 py-4 lg:px-8">{children}</div>
     </div>
   );
 }
 
 function ProductsMega({ onNavigate }: { onNavigate: () => void }) {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-x-5 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
       {siteConfig.productCategories.map((category) => (
         <div key={category.title} className="min-w-0">
           <Link
             href={category.href}
             onClick={onNavigate}
-            className="group flex items-center gap-3 border-b border-black/8 pb-2.5"
+            className="group flex items-center gap-2 border-b border-black/8 pb-1.5"
           >
-            <span className="relative h-11 w-14 shrink-0 overflow-hidden rounded-lg border border-black/6 bg-white">
+            <span className="relative h-7 w-9 shrink-0 overflow-hidden rounded border border-black/6 bg-white">
               <Image
                 src={category.image}
                 alt=""
                 fill
-                sizes="56px"
-                className="object-contain p-1"
+                sizes="36px"
+                className="object-contain p-px"
               />
             </span>
-            <span className="text-sm font-semibold leading-5 text-aqs-navy group-hover:text-aqs-red">
+            <span className="text-[14px] font-semibold leading-5 text-aqs-navy group-hover:text-aqs-red">
               {category.title}
             </span>
           </Link>
-          <ul className="mt-2">
+          <ul
+            className={cn(
+              "mt-1.5",
+              category.links.length > 6 && "grid grid-cols-2 gap-x-2",
+            )}
+          >
             {category.links.map((link) => (
               <li key={link.label}>
                 <Link
                   href={link.href}
                   onClick={onNavigate}
-                  className="block truncate rounded-md px-1.5 py-[3px] text-[13px] leading-5 text-aqs-muted hover:bg-[#f6f8fb] hover:text-aqs-red"
+                  className="block truncate rounded px-1 py-[3px] text-[13px] leading-5 text-aqs-muted hover:bg-[#f6f8fb] hover:text-aqs-red"
                 >
                   {link.label}
                 </Link>
