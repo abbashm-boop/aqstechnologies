@@ -5,7 +5,7 @@ import type { ProductItem } from "@/lib/catalog";
 
 export function ProductCards({ items }: { items: readonly ProductItem[] }) {
   return (
-    <div className="flex flex-wrap justify-center gap-5">
+    <div className="flex flex-wrap justify-center gap-x-5 gap-y-12">
       {items.map((item) => (
         <Link
           key={item.slug}
@@ -20,9 +20,7 @@ export function ProductCards({ items }: { items: readonly ProductItem[] }) {
           />
           <h3 className="mt-4 text-center text-sm font-semibold text-aqs-navy">
             {item.label}
-          </h3>
-          <p className="mt-1 text-center text-xs text-aqs-muted">{item.spec}</p>
-        </Link>
+          </h3>        </Link>
       ))}
     </div>
   );

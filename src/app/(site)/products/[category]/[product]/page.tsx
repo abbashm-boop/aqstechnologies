@@ -47,7 +47,7 @@ export default async function ProductPage({
       <CatalogHero
         eyebrow={category.title}
         title={product.label}
-        description={`${product.spec}. Genuine ${product.label.toLowerCase()} supplied and distributed by AQS Technologies LLC across the UAE and region.`}
+        description={`${product.spec}. Genuine ${product.label.toLowerCase()} supplied and distributed by AQS Technologies across the UAE and region.`}
         image={product.image}
         imageAlt={product.label}
         holoSlug={category.slug}

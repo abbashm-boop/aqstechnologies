@@ -8,7 +8,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { siteConfig } from "@/config/site";
 
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  "AQS Technologies LLC Dubai UAE",
+  "AQS Technologies Dubai UAE",
 )}`;
 
 const heroTopics = [
@@ -84,7 +84,7 @@ export function ContactView({ topic }: { topic?: string }) {
           <div className="relative min-h-[260px] sm:min-h-[340px] lg:min-h-[560px]">
             <Image
               src="/images/contact-lobby.jpg"
-              alt="AQS Technologies LLC office lobby in Dubai"
+              alt="AQS Technologies office lobby in Dubai"
               fill
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
@@ -94,7 +94,7 @@ export function ContactView({ topic }: { topic?: string }) {
             <div className="absolute top-[16%] right-[9%] hidden rounded-xl bg-white px-3 py-2 shadow-[0_12px_30px_rgba(0,0,0,0.22)] lg:block">
               <img
                 src="/brand/logo.png"
-                alt="AQS Technologies LLC"
+                alt="AQS Technologies"
                 className="h-9 w-auto max-w-[140px] object-contain sm:h-11"
               />
             </div>
@@ -143,15 +143,19 @@ export function ContactView({ topic }: { topic?: string }) {
                 >
                   <p>{siteConfig.contact.phone}</p>
                   <p className="mt-1 text-[12px] text-aqs-muted">
-                    WhatsApp available for product inquiries
+                    Calls and WhatsApp
                   </p>
                 </InfoCard>
                 <InfoCard
                   icon="mail"
                   title="Email Us"
-                  href={`mailto:${siteConfig.contact.email}`}
+                  href={siteConfig.contact.emailHref}
                 >
-                  <p>{siteConfig.contact.email}</p>
+                  {siteConfig.contact.emails.map((email) => (
+                    <p key={email} className="break-all">
+                      {email}
+                    </p>
+                  ))}
                   <p className="mt-1 text-[12px] text-aqs-muted">
                     We typically reply within 24 hours
                   </p>
@@ -167,7 +171,7 @@ export function ContactView({ topic }: { topic?: string }) {
                   title="Technical Support"
                   href={siteConfig.contact.whatsapp}
                 >
-                  <p>Product specification help</p>
+                  <p>{siteConfig.contact.whatsappPhone}</p>
                   <p className="mt-1 text-[12px] text-aqs-muted">
                     Chat with us on WhatsApp
                   </p>
@@ -206,7 +210,7 @@ export function ContactView({ topic }: { topic?: string }) {
                 <div className="relative hidden h-[108px] overflow-hidden rounded-xl border border-white/12 sm:block">
                   <Image
                     src="/images/contact-quote.jpg"
-                    alt="Request a quote from AQS Technologies LLC"
+                    alt="Request a quote from AQS Technologies"
                     fill
                     sizes="(min-width: 1024px) 16vw, 40vw"
                     className="object-cover"
@@ -252,7 +256,7 @@ export function ContactView({ topic }: { topic?: string }) {
                   Let&apos;s work together
                 </p>
                 <h2 className="mt-3 max-w-md text-[1.7rem] font-semibold tracking-tight sm:text-[2.05rem] sm:leading-[1.15]">
-                  Partner with AQS Technologies LLC for Your Technology Needs
+                  Partner with AQS Technologies for Your Technology Needs
                 </h2>
                 <p className="mt-4 max-w-md text-sm leading-6 text-white/72">
                   Whether you&apos;re looking for products, partnership

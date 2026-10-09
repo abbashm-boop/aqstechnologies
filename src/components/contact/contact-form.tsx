@@ -14,7 +14,7 @@ const BUSINESS_TYPES = [
 ];
 
 const INTEREST_OPTIONS = [
-  "Access Control & Identification",
+  "Access Control",
   "Audio Video",
   "Networking",
   "Enclosures",
@@ -24,7 +24,7 @@ const INTEREST_OPTIONS = [
 ];
 
 const TOPIC_INTEREST: Record<string, string> = {
-  products: "Access Control & Identification",
+  products: "Access Control",
   partners: "Partnership",
   support: "Technical Support",
   quote: "Not sure yet",
@@ -51,7 +51,7 @@ export function ContactForm({ topic }: { topic?: string }) {
 
   const whatsappHref = useMemo(() => {
     const lines = [
-      "Hello AQS Technologies LLC, I would like to discuss a requirement.",
+      "Hello AQS Technologies, I would like to discuss a requirement.",
       "",
       `Name: ${name.trim()}`,
       company.trim() ? `Company: ${company.trim()}` : null,
@@ -212,7 +212,7 @@ export function ContactForm({ topic }: { topic?: string }) {
           communication.
         </p>
         <p className="sr-only">
-          Submitting opens WhatsApp to {siteConfig.contact.phone}.
+          Submitting opens WhatsApp to {siteConfig.contact.whatsappPhone}.
         </p>
       </div>
     </form>

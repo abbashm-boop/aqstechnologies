@@ -9,7 +9,7 @@ const faqs = [
   {
     q: "What are your working hours?",
     a: "We are based in Dubai and typically respond during UAE business hours. For the fastest reply, WhatsApp us on " +
-      siteConfig.contact.phone +
+      siteConfig.contact.whatsappPhone +
       ".",
   },
   {
@@ -25,12 +25,12 @@ const faqs = [
     a: "Yes. We help with product specification, selection and after-sale support by phone, email or WhatsApp.",
   },
   {
-    q: "Can I become a partner with AQS Technologies LLC?",
+    q: "Can I become a partner with AQS Technologies?",
     a: "Yes. We work with system integrators, resellers and installers. Tell us about your business in the form and our team will follow up.",
   },
   {
     q: "What brands do you distribute?",
-    a: "We supply genuine products from HID, Security Shells, TREND Networks and KAYBE across access control, networking and enclosures.",
+    a: "We supply genuine products from HID, Security Shells Infotech, TREND and KAYBE across access control, audio video, networking and enclosures.",
   },
 ];
 

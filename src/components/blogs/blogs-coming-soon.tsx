@@ -83,7 +83,7 @@ export function BlogsComingSoon() {
           <div className="relative min-h-[260px] sm:min-h-[340px] lg:min-h-[520px]">
             <Image
               src="/images/blog-hero.jpg"
-              alt="AQS Technologies LLC workplace insights and collaboration space"
+              alt="AQS Technologies workplace insights and collaboration space"
               fill
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"

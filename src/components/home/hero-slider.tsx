@@ -15,16 +15,18 @@ type Slide = {
   href: string;
   cta: string;
   logo?: string;
+  fit?: "contain";
 };
 
 const slides: Slide[] = [
   {
-    image: "/images/hero-slide-intro.jpg",
-    eyebrow: "AQS Technologies LLC",
+    image: "/images/hero-slide-access-control.jpg",
+    eyebrow: "AQS Technologies",
     title: "Your Trusted Technology Supplier",
     line: "Genuine brands, UAE supply and project support.",
     href: "/products",
     cta: "Explore Products",
+    fit: "contain",
   },
   {
     image: "/images/hero-slide-hid.jpg",
@@ -37,7 +39,7 @@ const slides: Slide[] = [
   },
   {
     image: "/images/hero-slide-security-shells.jpg",
-    eyebrow: "Security Shells",
+    eyebrow: "Security Shells Infotech",
     title: "Identity & Security Platforms",
     line: "iSecure IAM and security identity solutions.",
     href: "/products?brand=security-shells",
@@ -45,10 +47,10 @@ const slides: Slide[] = [
     logo: "/brands/security-shells.png",
   },
   {
-    image: "/images/hero-slide-trend.jpg",
+    image: "/images/product-interactive-flat-screen-2.jpg",
     eyebrow: "TREND by STEPWELL",
-    title: "Network Testing Solutions",
-    line: "Copper and fiber certifiers, testers and PoE tools.",
+    title: "Audio Video Solutions",
+    line: "Interactive flat panels, video walls and conferencing.",
     href: "/products?brand=trend",
     cta: "View TREND Products",
     logo: "/brands/trend.png",
@@ -64,21 +66,43 @@ const slides: Slide[] = [
   },
 ];
 
-export function HeroSlider() {
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const slide = slides[index];
+const AUTOPLAY_MS = 3000;
 
-  const go = useCallback((next: number) => {
-    setIndex((next + slides.length) % slides.length);
-  }, []);
+export function HeroSlider() {
+  const [state, setState] = useState({ index: 0, prev: -1, dir: 1 });
+  const [paused, setPaused] = useState(false);
+  const { index, prev, dir } = state;
+  const slide = slides[index];
+  const count = slides.length;
+
+  const go = useCallback(
+    (next: number, direction?: number) => {
+      setState((current) => {
+        const target = (next + count) % count;
+        if (target === current.index) return current;
+        const offset = (target - current.index + count) % count;
+        return {
+          index: target,
+          prev: current.index,
+          dir: direction ?? (offset === count - 1 ? -1 : 1),
+        };
+      });
+    },
+    [count],
+  );
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (media.matches || paused) return;
-    const timer = window.setInterval(() => go(index + 1), 5600);
-    return () => window.clearInterval(timer);
+    const timer = window.setTimeout(() => go(index + 1, 1), AUTOPLAY_MS);
+    return () => window.clearTimeout(timer);
   }, [go, index, paused]);
+
+  const position = (i: number) => {
+    if (i === index) return "translate-x-0";
+    if (i === prev) return dir > 0 ? "-translate-x-full" : "translate-x-full";
+    return (i - index + count) % count === count - 1 ? "-translate-x-full" : "translate-x-full";
+  };
 
   return (
     <section
@@ -89,24 +113,52 @@ export function HeroSlider() {
       aria-label="AQS Technologies highlights"
     >
       <div className="relative sm:min-h-[460px] lg:min-h-[520px]">
-        <div className="relative h-[210px] sm:absolute sm:inset-0 sm:h-auto">
+        <div className="relative h-[210px] overflow-hidden sm:absolute sm:inset-0 sm:h-auto">
           {slides.map((item, i) => (
             <div
               key={item.image}
               className={cn(
-                "absolute inset-0 transition-opacity duration-700",
-                i === index ? "opacity-100" : "opacity-0",
+                "absolute inset-0 will-change-transform",
+                position(i),
+                (i === index || i === prev) &&
+                  "transition-transform duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)]",
               )}
               aria-hidden={i !== index}
             >
-              <Image
-                src={item.image}
-                alt=""
-                fill
-                priority={i === 0}
-                sizes="100vw"
-                className="object-cover object-[center_30%] sm:object-center"
-              />
+              {item.fit === "contain" ? (
+                <>
+                  <Image
+                    src={item.image}
+                    alt=""
+                    fill
+                    priority={i === 0}
+                    loading={i === 0 ? undefined : "eager"}
+                    sizes="100vw"
+                    className="scale-110 object-cover blur-2xl brightness-[0.55]"
+                  />
+                  <div className="absolute inset-y-0 left-1/2 aspect-[3/2] -translate-x-1/2 sm:right-0 sm:left-auto sm:translate-x-0 sm:[mask-image:linear-gradient(to_right,transparent,black_28%)]">
+                    <Image
+                      src={item.image}
+                      alt=""
+                      fill
+                      priority={i === 0}
+                      loading={i === 0 ? undefined : "eager"}
+                      sizes="(min-width: 640px) 60vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </>
+              ) : (
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  priority={i === 0}
+                  loading={i === 0 ? undefined : "eager"}
+                  sizes="100vw"
+                  className="object-cover object-[center_30%] sm:object-center"
+                />
+              )}
             </div>
           ))}
         </div>

@@ -81,18 +81,27 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2 text-sm text-aqs-muted">
               <li>{siteConfig.contact.location}</li>
               <li>
-                <a href={siteConfig.contact.phoneHref} className="hover:text-aqs-red">
-                  {siteConfig.contact.phone}
+                <a
+                  href={siteConfig.contact.whatsapp}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-aqs-red"
+                >
+                  WhatsApp: {siteConfig.contact.whatsappPhone}
                 </a>
               </li>
               <li>
-                <a
-                  href={`mailto:${siteConfig.contact.email}`}
-                  className="break-all hover:text-aqs-red"
-                >
-                  {siteConfig.contact.email}
+                <a href={siteConfig.contact.phoneHref} className="hover:text-aqs-red">
+                  Call / WhatsApp: {siteConfig.contact.phone}
                 </a>
               </li>
+              {siteConfig.contact.emails.map((email) => (
+                <li key={email}>
+                  <a href={`mailto:${email}`} className="break-all hover:text-aqs-red">
+                    {email}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

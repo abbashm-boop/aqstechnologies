@@ -48,7 +48,7 @@ export function AboutView() {
               <div className="relative aspect-[5/4]">
                 <Image
                   src="/images/hero-workplace.jpg"
-                  alt="AQS Technologies LLC workplace"
+                  alt="AQS Technologies workplace"
                   fill
                   priority
                   sizes="(min-width: 1024px) 42vw, 90vw"
@@ -109,7 +109,7 @@ export function AboutView() {
               <div className="relative aspect-[16/11]">
                 <Image
                   src="/images/hero-workplace.jpg"
-                  alt="Modern workplace supported by AQS Technologies LLC"
+                  alt="Modern workplace supported by AQS Technologies"
                   fill
                   sizes="(min-width: 1024px) 48vw, 90vw"
                   className="img-zoom object-cover object-[center_40%]"
@@ -346,7 +346,7 @@ export function AboutView() {
               <div className="relative aspect-[16/11]">
                 <Image
                   src="/images/cta-dubai.jpg"
-                  alt="AQS Technologies LLC serving businesses across Dubai and the region"
+                  alt="AQS Technologies serving businesses across Dubai and the region"
                   fill
                   sizes="(min-width: 1024px) 45vw, 90vw"
                   className="img-zoom object-cover object-center"

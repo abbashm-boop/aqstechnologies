@@ -3,12 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { Fragment, useEffect, useRef, useState, type FormEvent } from "react";
 import { createPortal } from "react-dom";
 
 import { Tilt } from "@/components/home/tilt";
 import { Container } from "@/components/ui/container";
-import { FitImage } from "@/components/ui/fit-image";
 import { BrandLogo } from "@/components/ui/brand-logo";
 import { WhatsAppIcon } from "@/components/layout/whatsapp-button";
 import { siteConfig } from "@/config/site";
@@ -72,6 +71,7 @@ export function SiteHeader() {
     function onPointerDown(event: MouseEvent) {
       if (!barRef.current?.contains(event.target as Node)) {
         closeNow();
+        setMobileSearch(false);
       }
     }
 
@@ -97,21 +97,36 @@ export function SiteHeader() {
   return (
     <header ref={headerRef} className="sticky top-0 z-[70] overflow-visible [overflow-anchor:none] bg-white">
       <div className="bg-aqs-navy text-white">
-        <div className="mx-auto flex h-9 w-full max-w-[1280px] items-center justify-between gap-6 px-6 text-[12px] sm:h-10 lg:px-10">
+        <div className="mx-auto flex h-9 w-full max-w-[1280px] items-center justify-between gap-6 px-5 text-[12px] sm:h-10 lg:px-8">
           <p className="truncate font-medium">{siteConfig.tagline}</p>
           <div className="hidden min-w-0 items-center gap-3 xl:flex">
             <span>{siteConfig.contact.location}</span>
             <span className="text-white/30">|</span>
-            <a href={siteConfig.contact.phoneHref} className="hover:text-white/80">
-              {siteConfig.contact.phone}
+            <a
+              href={siteConfig.contact.whatsapp}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`WhatsApp ${siteConfig.contact.whatsappPhone}`}
+              className="inline-flex items-center gap-1.5 whitespace-nowrap hover:text-white/80"
+            >
+              <WhatsAppIcon className="h-3.5 w-3.5" />
+              {siteConfig.contact.whatsappPhone}
             </a>
             <span className="text-white/30">|</span>
             <a
-              href={`mailto:${siteConfig.contact.email}`}
-              className="hover:text-white/80"
+              href={siteConfig.contact.phoneHref}
+              className="whitespace-nowrap hover:text-white/80"
             >
-              {siteConfig.contact.email}
+              {siteConfig.contact.phone}
             </a>
+            {siteConfig.contact.emails.map((email) => (
+              <Fragment key={email}>
+                <span className="text-white/30">|</span>
+                <a href={`mailto:${email}`} className="hover:text-white/80">
+                  {email}
+                </a>
+              </Fragment>
+            ))}
             <span className="text-white/30">|</span>
             <a
               href={siteConfig.contact.linkedin}
@@ -122,16 +137,6 @@ export function SiteHeader() {
             >
               in
             </a>
-            <span className="text-white/30">|</span>
-            <a
-              href={siteConfig.contact.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp"
-              className="inline-flex items-center hover:text-white/80"
-            >
-              <WhatsAppIcon className="h-3.5 w-3.5" />
-            </a>
           </div>
         </div>
       </div>
@@ -141,19 +146,26 @@ export function SiteHeader() {
         className="relative border-b border-black/8 bg-white"
         onMouseLeave={closeSoon}
       >
-        <div className="mx-auto flex h-[76px] w-full min-w-0 max-w-[1280px] items-center px-6 sm:h-[92px] lg:px-10">
-          <Link href="/" className="relative z-10 shrink-0" aria-label={siteConfig.legalName}>
+        <div className="mx-auto flex h-[76px] w-full min-w-0 max-w-[1280px] items-center px-5 sm:h-[92px] lg:px-8">
+          <Link
+            href="/"
+            className="relative z-10 -ml-1.5 shrink-0 sm:-ml-2"
+            aria-label={siteConfig.legalName}
+          >
             <Image
               src="/brand/logo.png"
               alt={siteConfig.legalName}
               width={900}
               height={351}
               priority
-              className="block h-12 w-auto object-contain object-left sm:h-14 xl:h-16"
+              className="block h-16 w-auto object-contain object-left sm:h-[72px] xl:h-20"
             />
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 xl:flex" aria-label="Main">
+          <nav
+            className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex"
+            aria-label="Main"
+          >
             {siteConfig.nav.map((item) => {
               const hasMenu = "menu" in item && Boolean(item.menu);
               const active = isActive(item.href);
@@ -198,36 +210,51 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="ml-auto flex shrink-0 items-center gap-2.5 xl:ml-0">
+          <div className="ml-auto flex shrink-0 items-center gap-2.5 lg:ml-0">
             <SearchField
               query={query}
               setQuery={setQuery}
               onSearch={onSearch}
               className="hidden min-w-0 xl:block xl:w-[180px] xl:flex-none 2xl:w-[200px]"
             />
-            <button
-              type="button"
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 xl:hidden"
-              aria-label={mobileSearch ? "Close search" : "Search products"}
-              aria-expanded={mobileSearch}
-              onClick={() => {
-                setMobileSearch((open) => !open);
-                setMobileOpen(false);
-                closeNow();
-              }}
-            >
-              {mobileSearch ? <CloseIcon /> : <SearchIcon className="h-[18px] w-[18px]" />}
-            </button>
+            <div className="relative xl:hidden">
+              <button
+                type="button"
+                className={cn(
+                  "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5",
+                  mobileSearch && "bg-black/5 text-aqs-red",
+                )}
+                aria-label={mobileSearch ? "Close search" : "Search products"}
+                aria-expanded={mobileSearch}
+                onClick={() => {
+                  setMobileSearch((open) => !open);
+                  setMobileOpen(false);
+                  closeNow();
+                }}
+              >
+                {mobileSearch ? <CloseIcon /> : <SearchIcon className="h-[18px] w-[18px]" />}
+              </button>
+              {mobileSearch ? (
+                <div
+                  className="absolute top-[calc(100%+18px)] -right-12 z-50 w-[min(320px,calc(100vw-40px))] rounded-2xl border border-black/8 bg-white p-2 shadow-[0_18px_40px_rgba(11,31,58,0.16)] sm:right-0 sm:top-[calc(100%+26px)]"
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") setMobileSearch(false);
+                  }}
+                >
+                  <SearchField query={query} setQuery={setQuery} onSearch={onSearch} autoFocus />
+                </div>
+              ) : null}
+            </div>
             <Link
               href="/contact"
               onMouseEnter={closeNow}
-              className="hidden h-10 shrink-0 items-center rounded-full bg-aqs-red px-4 text-[13px] font-semibold whitespace-nowrap text-white hover:bg-aqs-red-hover xl:inline-flex"
+              className="hidden h-10 shrink-0 items-center rounded-full bg-aqs-red px-4 text-[13px] font-semibold whitespace-nowrap text-white hover:bg-aqs-red-hover lg:inline-flex"
             >
               Request a Quote
             </Link>
             <button
               type="button"
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 xl:hidden"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 lg:hidden"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               onClick={(event) => {
@@ -242,12 +269,6 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
-
-        {mobileSearch ? (
-          <div className="border-t border-black/8 bg-white px-5 py-3 xl:hidden">
-            <SearchField query={query} setQuery={setQuery} onSearch={onSearch} autoFocus />
-          </div>
-        ) : null}
 
         {openMenu === "products" ? (
           <MegaWrap onMouseEnter={() => open("products")}>
@@ -264,7 +285,7 @@ export function SiteHeader() {
       {mobileOpen
         ? createPortal(
             <div
-              className="fixed inset-x-0 z-[60] overflow-x-clip overflow-y-auto overscroll-contain border-t border-black/8 bg-white xl:hidden"
+              className="fixed inset-x-0 z-[60] overflow-x-clip overflow-y-auto overscroll-contain border-t border-black/8 bg-white lg:hidden"
               style={{ top: drawerTop, bottom: 0 }}
             >
               <Container className="flex flex-col gap-1 py-4 pb-24">
@@ -369,38 +390,44 @@ function MegaWrap({
 }) {
   return (
     <div
-      className="absolute inset-x-0 top-full z-40 -mt-px hidden border-t border-black/8 bg-white shadow-[0_18px_40px_rgba(11,31,58,0.12)] xl:block"
+      className="absolute inset-x-0 top-full z-40 -mt-px hidden border-t border-black/8 bg-white shadow-[0_18px_40px_rgba(11,31,58,0.12)] lg:block"
       onMouseEnter={onMouseEnter}
     >
-      <div className="mx-auto w-full max-w-[1280px] px-6 py-6 lg:px-10">{children}</div>
+      <div className="mx-auto w-full max-w-[1280px] px-5 py-5 lg:px-8">{children}</div>
     </div>
   );
 }
 
 function ProductsMega({ onNavigate }: { onNavigate: () => void }) {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {siteConfig.productCategories.map((category) => (
         <div key={category.title} className="min-w-0">
-          <Link href={category.href} onClick={onNavigate} className="group block">
-            <FitImage
-              src={category.image}
-              alt={category.title}
-              sizes="(min-width: 1024px) 18vw, 45vw"
-              className="aspect-[4/3] rounded-2xl"
-              insetClassName="inset-4"
-            />
-            <p className="mt-3 text-sm font-semibold leading-5 text-aqs-navy group-hover:text-aqs-red">
+          <Link
+            href={category.href}
+            onClick={onNavigate}
+            className="group flex items-center gap-3 border-b border-black/8 pb-2.5"
+          >
+            <span className="relative h-11 w-14 shrink-0 overflow-hidden rounded-lg border border-black/6 bg-white">
+              <Image
+                src={category.image}
+                alt=""
+                fill
+                sizes="56px"
+                className="object-contain p-1"
+              />
+            </span>
+            <span className="text-sm font-semibold leading-5 text-aqs-navy group-hover:text-aqs-red">
               {category.title}
-            </p>
+            </span>
           </Link>
-          <ul className="mt-3 space-y-1.5">
+          <ul className="mt-2">
             {category.links.map((link) => (
               <li key={link.label}>
                 <Link
                   href={link.href}
                   onClick={onNavigate}
-                  className="block rounded-lg py-0.5 text-[13px] leading-5 text-aqs-muted hover:bg-[#f6f8fb] hover:text-aqs-red"
+                  className="block truncate rounded-md px-1.5 py-[3px] text-[13px] leading-5 text-aqs-muted hover:bg-[#f6f8fb] hover:text-aqs-red"
                 >
                   {link.label}
                 </Link>

@@ -12,7 +12,7 @@ export function CatalogHero({
   image,
   crumbs,
   logo = "/brand/logo.png",
-  logoAlt = "AQS Technologies LLC",
+  logoAlt = "AQS Technologies",
   quoteTitle,
   quoteText,
   holoSlug,

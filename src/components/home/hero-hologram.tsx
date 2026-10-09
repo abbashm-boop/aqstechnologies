@@ -7,12 +7,12 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 const categories = siteConfig.productCategories;
-const CARD_COPY = [
-  { title: "Access Control", line: "Readers, cards and identity systems." },
-  { title: "Audio Video", line: "Displays, conferencing and AV." },
-  { title: "Networking", line: "Cable certifiers and network testers." },
-  { title: "Enclosures", line: "Server and networking racks." },
-];
+const CARD_COPY: Record<string, { title: string; line: string }> = {
+  "access-control": { title: "Access Control", line: "HID readers, Seos cards and iSecure software." },
+  "audio-video": { title: "Audio Video", line: "Interactive flat screens and displays." },
+  networking: { title: "Networking", line: "LAN, BMS, telecom and fiber cables." },
+  enclosures: { title: "Enclosures", line: "Server and networking racks." },
+};
 const RAYS = [12, 20, 28, 36, 44, 52, 60, 68, 76, 84];
 const BEAMS = [18, 32, 50, 68, 82];
 const SPARKS = [
@@ -69,7 +69,12 @@ function IconRack() {
   );
 }
 
-const ICONS = [IconAccess, IconAv, IconNet, IconRack];
+const ICONS: Record<string, () => React.JSX.Element> = {
+  "access-control": IconAccess,
+  "audio-video": IconAv,
+  networking: IconNet,
+  enclosures: IconRack,
+};
 
 export function HeroHologram({
   className,
@@ -93,7 +98,7 @@ export function HeroHologram({
   const [locked, setLocked] = useState(Boolean(image || initialSlug));
   const [pressed, setPressed] = useState(false);
   const category = categories[active];
-  const copy = CARD_COPY[active];
+  const copy = CARD_COPY[category.slug] ?? { title: category.title, line: category.aboutBlurb };
   const featured = active === startIndex;
   const displayTitle = featured && title ? title : copy.title;
   const displayLine = featured && line ? line : copy.line;
@@ -214,7 +219,7 @@ export function HeroHologram({
 
       <div className="hero-holo-rail" aria-label="Categories">
         {categories.map((item, index) => {
-          const Icon = ICONS[index];
+          const Icon = ICONS[item.slug] ?? IconAccess;
           return (
             <button
               key={item.title}

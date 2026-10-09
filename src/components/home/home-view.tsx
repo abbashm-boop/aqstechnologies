@@ -95,7 +95,7 @@ export function HomeView() {
                 </Link>
               </div>
             </Reveal>
-            <div className="mt-10 flex flex-wrap justify-center gap-5">
+            <div className="mt-10 flex flex-wrap justify-center gap-x-5 gap-y-12">
               {category.links.map((item) => (
                 <Link
                   key={item.label}
@@ -110,9 +110,7 @@ export function HomeView() {
                   />
                   <h3 className="mt-4 text-center text-sm font-semibold text-aqs-navy">
                     {item.label}
-                  </h3>
-                  <p className="mt-1 text-center text-xs text-aqs-muted">{item.spec}</p>
-                </Link>
+                  </h3>                </Link>
               ))}
             </div>
           </Container>
@@ -157,7 +155,7 @@ export function HomeView() {
         <Container>
           <Reveal shift>
             <h2 className="mx-auto max-w-2xl text-center text-4xl font-semibold tracking-tight text-aqs-navy">
-              Why Choose AQS Technologies LLC
+              Why Choose AQS Technologies
             </h2>
           </Reveal>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
