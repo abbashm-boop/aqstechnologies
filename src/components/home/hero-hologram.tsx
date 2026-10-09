@@ -11,7 +11,7 @@ const CARD_COPY: Record<string, { title: string; line: string }> = {
   "access-control": { title: "Access Control", line: "HID readers, Seos cards and iSecure software." },
   "audio-video": { title: "Audio Video", line: "Interactive flat screens and displays." },
   networking: { title: "Networking", line: "LAN, BMS, telecom and fiber cables." },
-  enclosures: { title: "Enclosures", line: "Server and networking racks." },
+  enclosures: { title: "Networking & Racks", line: "Server and networking racks." },
 };
 const RAYS = [12, 20, 28, 36, 44, 52, 60, 68, 76, 84];
 const BEAMS = [18, 32, 50, 68, 82];

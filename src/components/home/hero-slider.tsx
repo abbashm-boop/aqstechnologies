@@ -36,7 +36,7 @@ const slides: Slide[] = [
     line: "HID Signo, HID Readers, Amico, Aero controllers, iCLASS, Seos and Vento cards.",
     href: "/products?brand=hid",
     cta: "View HID Products",
-    logo: "/brands/hid.png",
+    logo: "/brands/hid-logo.png",
   },
   {
     image: "/images/hero-slide-access-control.jpg",
@@ -59,10 +59,11 @@ const slides: Slide[] = [
   },
   {
     image: "/images/hero-slide-kaybe.jpg",
-    title: "Enclosures",
-    line: "Server racks, networking racks, open frame racks and specialized racks.",
-    href: "/products/enclosures",
-    cta: "View Products",
+    title: "Networking & Racks",
+    line: "LAN, BMS, HDMI, fiber and telecom cables, plus server and networking racks.",
+    href: "/products?brand=kaybe",
+    cta: "View KAYBE Products",
+    logo: "/brands/kaybe.png",
   },
 ];
 

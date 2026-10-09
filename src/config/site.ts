@@ -13,10 +13,8 @@ export const siteConfig = {
     emails: ["abbas@aqsinternational.com", "quresh@aqsinternational.com"],
     emailHref: "mailto:abbas@aqsinternational.com,quresh@aqsinternational.com",
     linkedin: "https://www.linkedin.com/",
-    whatsapp:
-      "https://wa.me/971562234115?text=Hello%20AQS%20Technologies%2C%20I%20would%20like%20to%20enquire%20about%20your%20products.",
-    whatsappSecondary:
-      "https://wa.me/971504966409?text=Hello%20AQS%20Technologies%2C%20I%20would%20like%20to%20enquire%20about%20your%20products.",
+    whatsapp: "https://wa.me/971562234115",
+    whatsappSecondary: "https://wa.me/971504966409",
   },
   nav: [
     { href: "/", label: "Home" },
@@ -270,7 +268,7 @@ export const siteConfig = {
       ],
     },
     {
-      title: "Enclosures",
+      title: "Networking & Racks",
       slug: "enclosures",
       href: "/products/enclosures",
       image: "/images/category-enclosures.png",
@@ -315,7 +313,7 @@ export const siteConfig = {
       description: "Access control and identity products.",
       aboutLine: "Access Control Products",
       href: "/products?brand=hid",
-      logo: "/brands/hid.png",
+      logo: "/brands/hid-logo.png",
       categorySlugs: ["access-control"],
     },
     {

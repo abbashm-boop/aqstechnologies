@@ -26,7 +26,7 @@ export function SiteHeader() {
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
-  const [drawerTop, setDrawerTop] = useState(104);
+  const [drawerTop, setDrawerTop] = useState(96);
 
   function open(menu: MenuKey) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -97,7 +97,7 @@ export function SiteHeader() {
   return (
     <header ref={headerRef} className="sticky top-0 z-[70] overflow-visible [overflow-anchor:none] bg-white">
       <div className="bg-aqs-navy text-white">
-        <div className="mx-auto flex h-9 w-full max-w-[1280px] items-center justify-between gap-6 px-5 text-[12px] sm:h-10 lg:px-8">
+        <div className="mx-auto flex h-8 w-full max-w-[1280px] items-center justify-between gap-6 px-5 text-[12px] lg:px-8">
           <p className="truncate font-medium">{siteConfig.tagline}</p>
           <div className="hidden min-w-0 items-center gap-3 xl:flex">
             <span>{siteConfig.contact.location}</span>
@@ -146,7 +146,7 @@ export function SiteHeader() {
         className="relative border-b border-black/8 bg-white"
         onMouseLeave={closeSoon}
       >
-        <div className="mx-auto flex h-[76px] w-full min-w-0 max-w-[1280px] items-center px-5 sm:h-[92px] lg:px-8">
+        <div className="mx-auto flex h-16 w-full min-w-0 max-w-[1280px] items-center px-5 sm:h-[72px] lg:px-8">
           <Link
             href="/"
             className="relative z-10 -ml-1.5 shrink-0 sm:-ml-2"
@@ -158,7 +158,7 @@ export function SiteHeader() {
               width={1041}
               height={374}
               priority
-              className="block h-16 w-auto object-contain object-left sm:h-[72px] xl:h-20"
+              className="block h-11 w-auto object-contain object-left sm:h-12 xl:h-14"
             />
           </Link>
 
@@ -178,7 +178,7 @@ export function SiteHeader() {
                     href={item.href}
                     onMouseEnter={closeNow}
                     className={cn(
-                      "rounded-full px-2.5 py-2 text-[13px] font-semibold whitespace-nowrap transition-colors xl:px-3.5",
+                      "rounded-full px-2.5 py-1.5 text-[13px] font-semibold whitespace-nowrap transition-colors xl:px-3.5",
                       active
                         ? "bg-aqs-red text-white"
                         : "text-aqs-navy hover:bg-black/5 hover:text-aqs-red",
@@ -196,7 +196,7 @@ export function SiteHeader() {
                   onMouseEnter={() => open(item.menu)}
                   onClick={() => open(item.menu)}
                   className={cn(
-                    "inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-[13px] font-semibold whitespace-nowrap transition-colors xl:gap-1.5 xl:px-3.5",
+                    "inline-flex items-center gap-1 rounded-full px-2.5 py-1.5 text-[13px] font-semibold whitespace-nowrap transition-colors xl:gap-1.5 xl:px-3.5",
                     active || menuOpen
                       ? "bg-aqs-red text-white"
                       : "text-aqs-navy hover:bg-black/5 hover:text-aqs-red",
@@ -221,7 +221,7 @@ export function SiteHeader() {
               <button
                 type="button"
                 className={cn(
-                  "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5",
+                  "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5",
                   mobileSearch && "bg-black/5 text-aqs-red",
                 )}
                 aria-label={mobileSearch ? "Close search" : "Search products"}
@@ -248,13 +248,13 @@ export function SiteHeader() {
             <Link
               href="/contact"
               onMouseEnter={closeNow}
-              className="hidden h-10 shrink-0 items-center rounded-full bg-aqs-red px-4 text-[13px] font-semibold whitespace-nowrap text-white hover:bg-aqs-red-hover lg:inline-flex"
+              className="hidden h-9 shrink-0 items-center rounded-full bg-aqs-red px-4 text-[13px] font-semibold whitespace-nowrap text-white hover:bg-aqs-red-hover lg:inline-flex"
             >
               Request a Quote
             </Link>
             <button
               type="button"
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 lg:hidden"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-aqs-navy hover:bg-black/5 lg:hidden"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               onClick={(event) => {
@@ -375,7 +375,7 @@ function SearchField({
         placeholder="Search products"
         aria-label="Search products"
         autoFocus={autoFocus}
-        className="h-10 w-full min-w-0 rounded-full border border-black/10 bg-[#f4f6f8] pr-3 pl-9 text-base text-aqs-navy outline-none transition-colors placeholder:text-aqs-muted/80 focus:border-aqs-red focus:bg-white lg:text-sm"
+        className="h-9 w-full min-w-0 rounded-full border border-black/10 bg-[#f4f6f8] pr-3 pl-9 text-base text-aqs-navy outline-none transition-colors placeholder:text-aqs-muted/80 focus:border-aqs-red focus:bg-white lg:text-sm"
       />
     </form>
   );

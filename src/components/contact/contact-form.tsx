@@ -17,7 +17,7 @@ const INTEREST_OPTIONS = [
   "Access Control",
   "Audio Video",
   "Networking",
-  "Enclosures",
+  "Networking & Racks",
   "Partnership",
   "Technical Support",
   "Not sure yet",

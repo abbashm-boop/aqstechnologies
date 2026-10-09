@@ -20,7 +20,7 @@ const upcoming = [
     text: "Copper, fiber and cable specification tips.",
   },
   {
-    title: "Enclosures",
+    title: "Networking & Racks",
     text: "Racks, cabinets and infrastructure planning.",
   },
 ];

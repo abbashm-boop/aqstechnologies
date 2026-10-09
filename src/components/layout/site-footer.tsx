@@ -9,8 +9,8 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto w-full border-t border-black/8 bg-white text-aqs-navy">
       <Container className="py-12 sm:py-14">
-        <div className="grid grid-cols-2 items-start gap-x-12 gap-y-10 md:grid-cols-4 md:gap-x-12 lg:gap-x-16">
-          <div className="col-span-2 min-w-0 md:col-span-1">
+        <div className="grid grid-cols-2 gap-x-10 gap-y-10 md:flex md:items-start md:justify-between md:gap-x-12">
+          <div className="col-span-2 max-w-[280px] md:col-auto md:shrink-0">
             <Link href="/" className="inline-block">
               <Image
                 src="/brand/logo.png"
@@ -44,7 +44,7 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="min-w-0">
+          <div className="min-w-0 md:shrink-0">
             <h2 className="text-sm font-semibold">Quick Links</h2>
             <ul className="mt-4 space-y-2">
               {siteConfig.footer.quickLinks.map((link) => (
@@ -60,7 +60,7 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="min-w-0">
+          <div className="min-w-0 md:shrink-0">
             <h2 className="text-sm font-semibold">Product Categories</h2>
             <ul className="mt-4 space-y-2">
               {siteConfig.productCategories.map((category) => (
@@ -76,7 +76,7 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="min-w-0">
+          <div className="min-w-0 md:shrink-0">
             <h2 className="text-sm font-semibold">Contact Us</h2>
             <ul className="mt-4 space-y-2 text-sm text-aqs-muted">
               <li>{siteConfig.contact.location}</li>
@@ -97,7 +97,7 @@ export function SiteFooter() {
               </li>
               {siteConfig.contact.emails.map((email) => (
                 <li key={email}>
-                  <a href={`mailto:${email}`} className="break-all hover:text-aqs-red">
+                  <a href={`mailto:${email}`} className="break-words hover:text-aqs-red">
                     {email}
                   </a>
                 </li>
