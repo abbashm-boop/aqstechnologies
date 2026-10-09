@@ -39,7 +39,7 @@ export const siteConfig = {
       href: "/products/access-control",
       image: "/images/category-access-control-hid.png",
       blurb:
-        "HID readers, iCLASS and Vento cards, door locks, emergency break glass, and iSecure software.",
+        "HID readers, Aero controllers, iCLASS and Vento cards, door locks, emergency break glass, and iSecure software.",
       aboutBlurb:
         "Reliable access control, identity and security solutions for modern workplaces.",
       links: [
@@ -67,6 +67,12 @@ export const siteConfig = {
           href: "/products/access-control/door-accessories",
           image: "/images/product-door.png",
           spec: "HID Amico biometric face readers",        },
+        {
+          label: "HID Aero Controller",
+          slug: "hid-aero",
+          href: "/products/access-control/hid-aero",
+          image: "/images/product-hid-aero.png",
+          spec: "HID Aero X1100 access controller",        },
         {
           label: "HID iCLASS",
           slug: "hid-iclass",
@@ -296,7 +302,7 @@ export const siteConfig = {
           label: "Specialized Racks",
           slug: "specialized-racks",
           href: "/products/enclosures/specialized-racks",
-          image: "/images/product-special-rack.jpg",
+          image: "/images/product-special-rack.png",
           spec: "Wall-mount cabinets",
         },
       ],

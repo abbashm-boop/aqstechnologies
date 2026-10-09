@@ -9,60 +9,60 @@ import { cn } from "@/lib/utils";
 
 type Slide = {
   image: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   line: string;
   href: string;
   cta: string;
   logo?: string;
   fit?: "contain";
+  object?: string;
 };
 
 const slides: Slide[] = [
   {
-    image: "/images/hero-slide-access-control.jpg",
+    image: "/images/hero-global.jpg",
     eyebrow: "AQS Technologies",
     title: "Your Trusted Technology Supplier",
     line: "Genuine brands, UAE supply and project support.",
     href: "/products",
     cta: "Explore Products",
-    fit: "contain",
+    object: "object-right",
   },
   {
     image: "/images/hero-slide-hid.jpg",
     eyebrow: "HID",
     title: "Access Control & Identification",
-    line: "Readers, controllers, credentials and identity systems.",
+    line: "HID Signo, HID Readers, Amico, Aero controllers, iCLASS, Seos and Vento cards.",
     href: "/products?brand=hid",
     cta: "View HID Products",
     logo: "/brands/hid.png",
   },
   {
-    image: "/images/hero-slide-security-shells.jpg",
+    image: "/images/hero-slide-access-control.jpg",
     eyebrow: "Security Shells Infotech",
     title: "Identity & Security Platforms",
-    line: "iSecure IAM and security identity solutions.",
+    line: "iSecure IAM, iSecure Trace, iSecure Cafe, iSecure Mobile, iSecure Identity and iSecure HRMS.",
     href: "/products?brand=security-shells",
     cta: "View Products",
     logo: "/brands/security-shells.png",
+    fit: "contain",
   },
   {
-    image: "/images/product-interactive-flat-screen-2.jpg",
+    image: "/images/product-splitters.png",
     eyebrow: "TREND by STEPWELL",
     title: "Audio Video Solutions",
-    line: "Interactive flat panels, video walls and conferencing.",
+    line: "Interactive flat panels, video walls, conferencing, wireless screen sharing, adapters, converters, mixers and splitters.",
     href: "/products?brand=trend",
     cta: "View TREND Products",
     logo: "/brands/trend.png",
   },
   {
     image: "/images/hero-slide-kaybe.jpg",
-    eyebrow: "KAYBE",
-    title: "Networking & Enclosures",
-    line: "Server racks, cabinets and specialized enclosures.",
-    href: "/products?brand=kaybe",
-    cta: "View KAYBE Products",
-    logo: "/brands/kaybe.png",
+    title: "Enclosures",
+    line: "Server racks, networking racks, open frame racks and specialized racks.",
+    href: "/products/enclosures",
+    cta: "View Products",
   },
 ];
 
@@ -156,7 +156,10 @@ export function HeroSlider() {
                   priority={i === 0}
                   loading={i === 0 ? undefined : "eager"}
                   sizes="100vw"
-                  className="object-cover object-[center_30%] sm:object-center"
+                  className={cn(
+                    "object-cover",
+                    item.object ?? "object-[center_30%] sm:object-center",
+                  )}
                 />
               )}
             </div>
@@ -172,15 +175,15 @@ export function HeroSlider() {
               <span className="mb-3 inline-flex h-9 items-center rounded-lg bg-white px-3">
                 <img src={slide.logo} alt="" className="h-5 w-auto max-w-[110px] object-contain" />
               </span>
-            ) : (
+            ) : slide.eyebrow ? (
               <p className="text-[11px] font-semibold tracking-[0.22em] text-white/80 uppercase">
                 {slide.eyebrow}
               </p>
-            )}
+            ) : null}
             <h1 className="mt-2 text-[22px] leading-[1.2] font-semibold tracking-tight sm:text-[34px] sm:leading-[1.12]">
               {slide.title}
             </h1>
-            <p className="mt-2 max-w-md text-[14px] leading-6 text-white/88 sm:text-[15px]">
+            <p className="mt-2 max-w-lg text-[14px] leading-6 text-white/88 sm:text-[15px]">
               {slide.line}
             </p>
             <Link
