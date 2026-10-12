@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
-
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Services",
-};
+  description:
+    "AQS Technologies supports websites, software and digital products alongside our core HID, AV and networking supply from Dubai.",
+  path: "/services",
+  index: false,
+});
 
 export default function ServicesPage() {
   return (

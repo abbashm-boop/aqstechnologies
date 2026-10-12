@@ -1,15 +1,24 @@
-import type { Metadata } from "next";
-
 import { Tilt } from "@/components/home/tilt";
 import { PageHero } from "@/components/layout/page-hero";
 import { BrandLogo } from "@/components/ui/brand-logo";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Partners",
-};
+  description:
+    "We supply genuine HID, Security Shells Infotech, TREND by STEPWELL and KAYBE products from Dubai, with stock support for access control, AV, cabling and racks.",
+  path: "/partners",
+  keywords: [
+    "HID partner Dubai",
+    "TREND by STEPWELL UAE",
+    "KAYBE cables",
+    "Security Shells iSecure",
+    "AQS Technologies partners",
+  ],
+});
 
 export default function PartnersPage() {
   return (

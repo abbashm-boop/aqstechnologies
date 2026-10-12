@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 
 import { CatalogHero } from "@/components/products/catalog-hero";
 import { ProductCards } from "@/components/products/product-cards";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Container } from "@/components/ui/container";
 import { filterCategories, getPartner } from "@/lib/catalog";
+import { collectionJsonLd, pageMetadata } from "@/lib/seo";
 
 type ProductSearch = {
   q?: string;
@@ -18,15 +20,35 @@ export async function generateMetadata({
   const { q = "", brand } = await searchParams;
   const partner = getPartner(brand);
   if (partner) {
-    return {
+    return pageMetadata({
       title: `${partner.name} Products`,
-      description: partner.description,
-    };
+      description: `Browse genuine ${partner.name} ${partner.description.replace(/\.$/, "").toLowerCase()} supplied by AQS Technologies from Dubai to projects across the UAE and GCC.`,
+      path: `/products?brand=${partner.slug}`,
+      image: partner.logo,
+      keywords: [partner.name, `${partner.name} Dubai`, `${partner.name} UAE`, partner.aboutLine],
+    });
   }
   if (q.trim()) {
-    return { title: `Search results for “${q.trim()}”` };
+    return pageMetadata({
+      title: `Search results for “${q.trim()}”`,
+      description: `Products matching “${q.trim()}” in HID access control, TREND AV, KAYBE cabling and racks.`,
+      path: `/products?q=${encodeURIComponent(q.trim())}`,
+      index: false,
+    });
   }
-  return { title: "Products" };
+  return pageMetadata({
+    title: "Products",
+    description:
+      "Explore HID access control, TREND audio video, KAYBE LAN and fiber cables, plus server and networking racks. Genuine supply from Dubai for UAE workplaces.",
+    path: "/products",
+    keywords: [
+      "HID products UAE",
+      "TREND AV products",
+      "KAYBE cables",
+      "server racks Dubai",
+      "access control catalog",
+    ],
+  });
 }
 
 export default async function ProductsPage({
@@ -43,8 +65,20 @@ export default async function ProductsPage({
   const firstImage =
     categories[0]?.image ?? partner?.logo ?? "/images/category-access-control-hid.png";
 
+  const jsonLd = collectionJsonLd({
+    name: partner ? `${partner.name} Products` : query ? `Search: ${query}` : "Technology Products",
+    description: partner
+      ? partner.description
+      : "HID, TREND and KAYBE products supplied by AQS Technologies in Dubai.",
+    path: partner ? `/products?brand=${partner.slug}` : "/products",
+    items: categories.flatMap((category) =>
+      category.links.map((item) => ({ name: item.label, path: item.href })),
+    ),
+  });
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <CatalogHero
         eyebrow={partner ? "Partner Products" : query ? "Search" : "Product Catalog"}
         title={

@@ -1,12 +1,18 @@
-import type { Metadata } from "next";
-
 import { BlogsComingSoon } from "@/components/blogs/blogs-coming-soon";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Blogs",
   description:
-    "AQS Technologies insights are coming soon. Practical guides on access control, AV, networking and enclosures.",
-};
+    "Practical notes from AQS Technologies on choosing HID access control, meeting-room AV, network cabling and racks for UAE workplaces. New articles are on the way.",
+  path: "/blogs",
+  keywords: [
+    "access control guide UAE",
+    "interactive display workplace",
+    "network cable types",
+    "AQS Technologies blog",
+  ],
+});
 
 export default function BlogsPage() {
   return <BlogsComingSoon />;

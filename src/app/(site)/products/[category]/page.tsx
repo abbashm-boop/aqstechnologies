@@ -3,9 +3,15 @@ import { notFound } from "next/navigation";
 
 import { CatalogHero } from "@/components/products/catalog-hero";
 import { ProductCards } from "@/components/products/product-cards";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 import { getCategory } from "@/lib/catalog";
+import {
+  breadcrumbJsonLd,
+  collectionJsonLd,
+  pageMetadata,
+} from "@/lib/seo";
 
 export function generateStaticParams() {
   return siteConfig.productCategories.map((category) => ({
@@ -21,10 +27,18 @@ export async function generateMetadata({
   const { category: slug } = await params;
   const category = getCategory(slug);
   if (!category) return { title: "Products" };
-  return {
+  return pageMetadata({
     title: category.title,
-    description: category.blurb,
-  };
+    description: `${category.blurb} Supplied by AQS Technologies from Dubai for offices, schools and projects across the UAE.`,
+    path: category.href,
+    image: category.image,
+    keywords: [
+      category.title,
+      `${category.title} Dubai`,
+      `${category.title} UAE`,
+      ...category.links.slice(0, 8).map((item) => item.label),
+    ],
+  });
 }
 
 export default async function CategoryPage({
@@ -38,6 +52,24 @@ export default async function CategoryPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Products", path: "/products" },
+          { name: category.title, path: category.href },
+        ])}
+      />
+      <JsonLd
+        data={collectionJsonLd({
+          name: category.title,
+          description: category.blurb,
+          path: category.href,
+          items: category.links.map((item) => ({
+            name: item.label,
+            path: item.href,
+          })),
+        })}
+      />
       <CatalogHero
         eyebrow="Product Category"
         title={category.title}

@@ -3,9 +3,16 @@ import { notFound } from "next/navigation";
 
 import { CatalogHero } from "@/components/products/catalog-hero";
 import { ProductCards } from "@/components/products/product-cards";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 import { getProduct } from "@/lib/catalog";
+import {
+  breadcrumbJsonLd,
+  pageMetadata,
+  productBrand,
+  productJsonLd,
+} from "@/lib/seo";
 
 export function generateStaticParams() {
   return siteConfig.productCategories.flatMap((category) =>
@@ -24,10 +31,22 @@ export async function generateMetadata({
   const { category: categorySlug, product: productSlug } = await params;
   const match = getProduct(categorySlug, productSlug);
   if (!match) return { title: "Products" };
-  return {
-    title: match.product.label,
-    description: `${match.product.spec}. ${match.category.blurb}`,
-  };
+  const { category, product } = match;
+  const brand = productBrand(product.label, category.slug);
+  return pageMetadata({
+    title: product.label,
+    description: `${product.spec}. Genuine ${product.label} from ${brand}, supplied by AQS Technologies in Dubai for ${category.title.toLowerCase()} projects across the UAE.`,
+    path: product.href,
+    image: product.image,
+    keywords: [
+      product.label,
+      brand,
+      `${product.label} Dubai`,
+      `${product.label} UAE`,
+      category.title,
+      product.spec,
+    ],
+  });
 }
 
 export default async function ProductPage({
@@ -42,8 +61,28 @@ export default async function ProductPage({
   const { category, product } = match;
   const related = category.links.filter((item) => item.slug !== product.slug);
 
+  const brand = productBrand(product.label, category.slug);
+
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Products", path: "/products" },
+          { name: category.title, path: category.href },
+          { name: product.label, path: product.href },
+        ])}
+      />
+      <JsonLd
+        data={productJsonLd({
+          name: product.label,
+          description: `${product.spec}. Genuine ${product.label} supplied from Dubai.`,
+          image: product.image,
+          path: product.href,
+          brand,
+          category: category.title,
+        })}
+      />
       <CatalogHero
         eyebrow={category.title}
         title={product.label}
