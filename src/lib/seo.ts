@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 import { siteConfig } from "@/config/site";
+import { CANONICAL_SITE_URL } from "@/lib/site-url";
 
-export const SITE_URL = siteConfig.url.replace(/\/$/, "");
+export const SITE_URL = CANONICAL_SITE_URL;
 export const DEFAULT_OG_IMAGE = "/images/hero-global.jpg";
 
 export const DEFAULT_KEYWORDS = [

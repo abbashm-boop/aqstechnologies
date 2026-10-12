@@ -1,31 +1,33 @@
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/config/site";
-import { SITE_URL } from "@/lib/seo";
+import { CANONICAL_SITE_URL } from "@/lib/site-url";
+
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const lastModified = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: SITE_URL, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE_URL}/products`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${SITE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/partners`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/blogs`, lastModified: now, changeFrequency: "weekly", priority: 0.4 },
+    { url: `${CANONICAL_SITE_URL}/`, lastModified, changeFrequency: "weekly", priority: 1 },
+    { url: `${CANONICAL_SITE_URL}/products`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${CANONICAL_SITE_URL}/about`, lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${CANONICAL_SITE_URL}/partners`, lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${CANONICAL_SITE_URL}/contact`, lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${CANONICAL_SITE_URL}/blogs`, lastModified, changeFrequency: "weekly", priority: 0.4 },
   ];
 
   const categoryRoutes = siteConfig.productCategories.map((category) => ({
-    url: `${SITE_URL}${category.href}`,
-    lastModified: now,
+    url: `${CANONICAL_SITE_URL}${category.href}`,
+    lastModified,
     changeFrequency: "weekly" as const,
     priority: 0.85,
   }));
 
   const productRoutes = siteConfig.productCategories.flatMap((category) =>
     category.links.map((item) => ({
-      url: `${SITE_URL}${item.href}`,
-      lastModified: now,
+      url: `${CANONICAL_SITE_URL}${item.href}`,
+      lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.75,
     })),

@@ -1,10 +1,12 @@
+import { getSiteUrl } from "@/lib/site-url";
+
 export const siteConfig = {
   name: "AQS Technologies",
   legalName: "AQS Technologies",
   tagline: "Your Trusted Technology Supplier & Distributor",
   description:
     "An independent supplier and distributor, sourcing, importing, exporting, and distributing quality technology products across the UAE and region.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aqstechnologies.com",
+  url: getSiteUrl(),
   contact: {
     location: "Dubai, UAE",
     whatsappPhone: "+971 56 223 4115",
