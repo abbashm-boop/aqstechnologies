@@ -41,6 +41,8 @@ export function pageMetadata({
   image = DEFAULT_OG_IMAGE,
   keywords = DEFAULT_KEYWORDS,
   index = true,
+  openGraphType = "website",
+  publishedTime,
 }: {
   title: string;
   description: string;
@@ -48,12 +50,20 @@ export function pageMetadata({
   image?: string;
   keywords?: string[];
   index?: boolean;
+  openGraphType?: "website" | "article";
+  publishedTime?: string;
 }): Metadata {
   const url = absoluteUrl(path);
   const ogImage = absoluteUrl(image);
   const fullTitle = title.includes(siteConfig.name)
     ? title
     : `${title} | ${siteConfig.name}`;
+  const shareImage = {
+    url: ogImage,
+    width: 1280,
+    height: 720,
+    alt: title,
+  };
 
   return {
     title: title.includes(siteConfig.name) ? { absolute: title } : title,
@@ -63,22 +73,30 @@ export function pageMetadata({
     robots: index
       ? { index: true, follow: true }
       : { index: false, follow: true },
-    openGraph: {
-      type: "website",
-      locale: "en_AE",
-      url,
-      siteName: siteConfig.name,
-      title: fullTitle,
-      description,
-      images: [
-        {
-          url: ogImage,
-          width: 1280,
-          height: 720,
-          alt: title,
-        },
-      ],
-    },
+    openGraph:
+      openGraphType === "article"
+        ? {
+            type: "article",
+            locale: "en_AE",
+            url,
+            siteName: siteConfig.name,
+            title: fullTitle,
+            description,
+            publishedTime,
+            modifiedTime: publishedTime,
+            authors: [siteConfig.name],
+            tags: keywords,
+            images: [shareImage],
+          }
+        : {
+            type: "website",
+            locale: "en_AE",
+            url,
+            siteName: siteConfig.name,
+            title: fullTitle,
+            description,
+            images: [shareImage],
+          },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
@@ -235,6 +253,41 @@ export function collectionJsonLd({
         url: absoluteUrl(item.path),
       })),
     },
+  };
+}
+
+export function articleJsonLd({
+  title,
+  description,
+  path,
+  image,
+  datePublished,
+  keywords = [],
+}: {
+  title: string;
+  description: string;
+  path: string;
+  image: string;
+  datePublished: string;
+  keywords?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    keywords: keywords.join(", "),
+    image: absoluteUrl(image),
+    datePublished,
+    dateModified: datePublished,
+    inLanguage: "en-AE",
+    author: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: SITE_URL,
+    },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    mainEntityOfPage: absoluteUrl(path),
   };
 }
 

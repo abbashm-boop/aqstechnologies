@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/config/site";
+import { blogPath, blogPosts } from "@/lib/blogs";
 import { CANONICAL_SITE_URL } from "@/lib/site-url";
 
 export const dynamic = "force-static";
@@ -14,8 +15,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${CANONICAL_SITE_URL}/about`, lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: `${CANONICAL_SITE_URL}/partners`, lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: `${CANONICAL_SITE_URL}/contact`, lastModified, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${CANONICAL_SITE_URL}/blogs`, lastModified, changeFrequency: "weekly", priority: 0.4 },
+    { url: `${CANONICAL_SITE_URL}/blogs`, lastModified, changeFrequency: "weekly", priority: 0.6 },
   ];
+
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${CANONICAL_SITE_URL}${blogPath(post.slug)}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly",
+    priority: 0.65,
+  }));
 
   const categoryRoutes = siteConfig.productCategories.map((category) => ({
     url: `${CANONICAL_SITE_URL}${category.href}`,
@@ -33,5 +41,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...staticRoutes, ...categoryRoutes, ...productRoutes];
+  return [...staticRoutes, ...blogRoutes, ...categoryRoutes, ...productRoutes];
 }

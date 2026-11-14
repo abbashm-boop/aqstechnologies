@@ -364,26 +364,6 @@ export const siteConfig = {
       text: "A team that helps you specify, source, and follow through.",
     },
   ],
-  blogs: [
-    {
-      title: "How Interactive Displays Are Transforming Modern Workplaces",
-      href: "/blogs",
-      image: "/images/blog-displays.jpg",
-      date: "Oct 2026",
-    },
-    {
-      title: "A Guide to Choosing the Right Access Control System",
-      href: "/blogs",
-      image: "/images/blog-access.jpg",
-      date: "Oct 2026",
-    },
-    {
-      title: "Understanding Different Types of Network Cables and Their Applications",
-      href: "/blogs",
-      image: "/images/blog-cables.jpg",
-      date: "Sep 2026",
-    },
-  ],
   footer: {
     blurb:
       "AQS Technologies is an independent technology supplier and distributor serving workplaces across the UAE and region.",

@@ -10,8 +10,9 @@ import { BrandLogo } from "@/components/ui/brand-logo";
 import { Container } from "@/components/ui/container";
 import { FitImage } from "@/components/ui/fit-image";
 import { Reveal } from "@/components/ui/reveal";
-import { subscribeScroll } from "@/lib/scroll-sync";
 import { siteConfig } from "@/config/site";
+import { blogPath, blogPosts } from "@/lib/blogs";
+import { subscribeScroll } from "@/lib/scroll-sync";
 
 export function HomeView() {
   const brandLoop = [...siteConfig.partners, ...siteConfig.partners];
@@ -214,25 +215,27 @@ export function HomeView() {
               Latest Blogs
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {siteConfig.blogs.map((post, index) => (
-              <Reveal key={post.title} delay={index * 90}>
-                <Link href={post.href} className="group block">
-                  <Tilt className="overflow-hidden rounded-[24px]">
-                    <div className="relative aspect-video">
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        sizes="(min-width: 768px) 30vw, 90vw"
-                        className="img-zoom object-cover object-center"
-                      />
-                    </div>
-                  </Tilt>
-                  <p className="mt-4 text-center text-xs font-medium text-aqs-muted">
-                    {post.date}
+          <div className="mt-12 grid gap-10 md:grid-cols-3">
+            {blogPosts.map((post, index) => (
+              <Reveal key={post.slug} delay={index * 90}>
+                <Link href={blogPath(post.slug)} className="group block">
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.imageAlt}
+                      fill
+                      sizes="(min-width: 768px) 30vw, 90vw"
+                      className="img-zoom object-cover object-center"
+                    />
+                  </div>
+                  <p className="mt-4 text-[11px] font-semibold tracking-[0.16em] text-aqs-red uppercase">
+                    {post.category}
+                    <span className="font-medium tracking-normal text-aqs-muted normal-case">
+                      {" "}
+                      · {post.dateLabel}
+                    </span>
                   </p>
-                  <h3 className="mt-2 text-center text-lg font-semibold leading-6 text-aqs-navy">
+                  <h3 className="mt-2 text-lg font-semibold leading-6 text-aqs-navy">
                     {post.title}
                   </h3>
                 </Link>
